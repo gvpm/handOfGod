@@ -20,6 +20,10 @@ public:
     void removeChild();
     void killSlowly(int alives);
 
+    void makeInfertile();
+    void makeFertile();
+
+
 
     //Gets and Sets
 
@@ -36,8 +40,6 @@ public:
     float getMyHeight();
     float getMyWidth();
     int getYearsDead();
-    void infertilize();
-    void fertilize();
 
 
 

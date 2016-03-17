@@ -194,20 +194,20 @@ void Environment::impregnate(int percentage){
 
 }
 
-void Environment::infertilize(int percentage){
+void Environment::makeInfertile(int percentage){
     for(int i = 0 ;i<beings.size();i++){
         if(beings[i].isAlive()&&ofRandom(100)<percentage){
-            beings[i].infertilize();
+            beings[i].makeInfertile();
 
         }
     }
 
 
 }
-void Environment::fertilize(int percentage){
+void Environment::makeFertile(int percentage){
     for(int i = 0 ;i<beings.size();i++){
         if(beings[i].isAlive()&&ofRandom(100)<percentage){
-            beings[i].fertilize();
+            beings[i].makeFertile();
 
         }
     }

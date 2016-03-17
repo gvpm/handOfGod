@@ -25,10 +25,10 @@ void ofApp::keyPressed(int key){
        e.impregnate(50);
     }
     if(key == '3') {
-       e.infertilize(50);
+       e.makeInfertile(50);
     }
     if(key == '4') {
-       e.fertilize(50);
+       e.makeFertile(50);
     }
 
 

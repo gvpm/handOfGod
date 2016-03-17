@@ -20,8 +20,8 @@ public:
     void giveBirths();
     void decimate(int percentage);
     void impregnate(int percentage);
-    void infertilize(int percentage);
-    void fertilize(int percentage);
+    void makeInfertile(int percentage);
+    void makeFertile(int percentage);
 
 
     ofTrueTypeFont		font;

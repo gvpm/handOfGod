@@ -431,10 +431,10 @@ void Being::removeChild(){
     childReady = false;
 }
 
-void Being::fertilize(){
+void Being::makeFertile(){
     fertile = true;
 }
-void Being::infertilize(){
+void Being::makeInfertile(){
     fertile = false;
 }
 
