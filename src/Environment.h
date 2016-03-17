@@ -22,6 +22,11 @@ public:
     void impregnate(int percentage);
     void makeInfertile(int percentage);
     void makeFertile(int percentage);
+    void addBeing();
+
+    void setGravity();
+    void invertGravity();
+
 
 
     ofTrueTypeFont		font;
@@ -29,6 +34,7 @@ public:
     vector<Tree> trees;
     //Being being();
 
+    float gravity;
     int yearInMs;
     int startTime;
     int currentTime;

@@ -6,7 +6,7 @@ class Being
 public:
     Being();
     //void setup(float height,float width,float floor,int yearInMs, vector <Being> &);
-    void setup(float height,float width,float floor,int yearInMs);
+    void setup(float height,float width,float floor,int yearInMs,float gravity);
     void update();
     void draw();
     void move();
@@ -40,6 +40,7 @@ public:
     float getMyHeight();
     float getMyWidth();
     int getYearsDead();
+    void setGravity(float gravity);
 
 
 
@@ -66,7 +67,7 @@ public:
 
     int yearInMs;
 
-    float g;
+    float gravity;
     float height;
     float width;
     float floor;

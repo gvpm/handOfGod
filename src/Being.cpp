@@ -59,7 +59,6 @@ Being::Being(){
     maxWidth = 18;
     speed = 1;
     direction = 0;
-    g=-1;
     c.r=ofRandom(255);
     c.g=ofRandom(255);
     c.b=ofRandom(255);
@@ -70,15 +69,18 @@ Being::Being(){
 //--------------------------------------------------------------
 
 //void Being::setup(float height,float width,float floor,int yearInMs,vector<Being> &_beings){
-void Being::setup(float height,float width,float floor,int yearInMs){
+void Being::setup(float height,float width,float floor,int yearInMs,float gravity){
     //beings = _beings;
     this-> yearInMs = yearInMs;
     alive = true;
     this->height = height;
     this->width = width;
     this->floor = floor;
+
     x=ofRandom(this->width-myWidth);
-    y=floor-myHeight;
+    y=ofRandom(this->height);
+    //y=floor-myHeight);
+
     //y=ofRandom(this->height);
     birthTime =  ofGetElapsedTimeMillis();
     deathAge = ofRandom(60,100);
@@ -88,7 +90,7 @@ void Being::setup(float height,float width,float floor,int yearInMs){
     //yLimit = floor-myHeight;
     yearsDead =0;
     fertile = true;
-
+    this->gravity=gravity;
 
 
 
@@ -98,41 +100,13 @@ void Being::setup(float height,float width,float floor,int yearInMs){
 
 //--------------------------------------------------------------
 void Being::update(){
-    y = floor-myHeight;
+
     myHeight=maxHeight;
     myWidth = maxWidth;
     //y=yLimit;
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
     age = timeElapsed/yearInMs;
-    /*
-    if(y<yLimit){
-        direction = 0;
-    }
-    */
-
-
-
-
-    //cout<< pregnant;
-
-    /*
-    if(age<12){
-        myHeight=maxHeight;
-        myWidth = maxWidth;
-
-
-    }else if(age>=12 && age<19){
-        myHeight=maxHeight;
-        myWidth = maxWidth;
-
-    }else if (age >=19){
-        myHeight=maxHeight;
-        myWidth = maxWidth;
-
-    }
-
-    */
 
 
 
@@ -241,6 +215,7 @@ void Being::draw(){
     }else{
         ofSetColor(255);
         myHeight = 26;
+        y = floor-myHeight;
         tomb.draw(x,y+2);
 
 
@@ -251,13 +226,13 @@ void Being::draw(){
 
 }
 void Being::move(){
-    y = floor-myHeight;
-    /*
-    y = y-g;
+    //y = floor-myHeight;
+
+    y = y+gravity;
     if(y>floor-myHeight){
-      y=yLimit;
+      y = floor-myHeight;
     }
-    */
+
 
 //Will move acording to direction and speed
     setX(getX()+(getDirection()*getSpeed()));
@@ -293,6 +268,9 @@ void Being::move(){
 }
 
 void Being::changeDirection(){
+    if(y<floor-myHeight){
+        direction = 0;
+    }
 
     if(ofRandom(1000)>990){
     float random = ofRandom(1000);
@@ -316,6 +294,13 @@ void Being::changeDirection(){
 
 void Being::setX(float x){
     this->x = x;
+
+
+
+}
+
+void Being::setGravity(float gravity){
+    this->gravity = gravity;
 
 
 
@@ -441,7 +426,11 @@ void Being::makeInfertile(){
 
 void Being::killSlowly(int alives){
     //alive=false;
-    deathAge = age+ofRandom((int)alives/100);
+    int division = (int)(alives/100);
+    if(division<5){
+        division = 5;
+    }
+    deathAge = age+ofRandom(division);
     //deathAge = age;
 
 }

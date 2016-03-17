@@ -6,12 +6,13 @@ Environment::Environment(){
     startTime = ofGetElapsedTimeMillis();
     yearInMs = 1000;
     year = 0;
+    gravity = 3.9;
 
 
     for(int i = 0 ;i<10;i++){
     Being b;
     //b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs, beings);
-    b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs);
+    b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,gravity);
     beings.push_back(b);
     }
     for(int i = 0 ;i<3;i++){
@@ -214,13 +215,37 @@ void Environment::makeFertile(int percentage){
 
 
 }
+void Environment::addBeing(){
+    Being b;
+    b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,gravity);
+    beings.push_back(b);
+
+
+}
+
+void Environment::setGravity(){
+
+
+}
+
+void Environment::invertGravity(){
+    gravity = -gravity;
+    for(int i = 0 ;i<beings.size();i++){
+        if(beings[i].isAlive()){
+            beings[i].setGravity(gravity);
+
+        }
+    }
+
+}
+
 void Environment::giveBirths(){
     int size = beings.size();
     for(int i =0; i<size;i++){
         if(beings[i].isChildReady()){
             birthsToGive++;
             Being b;
-            b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs);
+            b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,gravity);
             b.setX(beings[i].getX());
             b.setY(beings[i].getY());
             beings.push_back(b);

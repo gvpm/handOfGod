@@ -30,6 +30,14 @@ void ofApp::keyPressed(int key){
     if(key == '4') {
        e.makeFertile(50);
     }
+    if(key == '5') {
+       e.addBeing();
+    }
+    if(key == '0') {
+       e.invertGravity();
+    }
+
+
 
 
 }
