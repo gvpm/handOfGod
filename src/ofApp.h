@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Environment.h"
+#include "ofxOsc.h"
 
 
 class ofApp : public ofBaseApp{
@@ -23,7 +24,13 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
+    ofTrueTypeFont		font;
+    string lastAction;
+    int lastWheelValue;
+
     Environment e;
+    ofxOscReceiver receiver;
+    int wheelValue;
 
 
 

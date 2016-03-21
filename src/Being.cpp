@@ -177,7 +177,7 @@ void Being::draw(){
         if(isPregnant()){
             ofSetColor(255,0,0);
         }
-        imagesLeft[frameIndex].resize(myWidth,myHeight);
+        //imagesLeft[frameIndex].resize(myWidth,myHeight);
         imagesLeft[frameIndex].draw(x, y);
     }else if(direction == 1){
         ofSetColor(255);
@@ -190,7 +190,7 @@ void Being::draw(){
         if(isPregnant()){
            ofSetColor(255,0,0);
         }
-        imagesRight[frameIndex].resize(myWidth,myHeight);
+        //imagesRight[frameIndex].resize(myWidth,myHeight);
         imagesRight[frameIndex].draw(x, y);
     }else if (direction==0){
         ofSetColor(255);
@@ -203,7 +203,7 @@ void Being::draw(){
         if(isPregnant()){
             ofSetColor(255,0,0);
         }
-        beingFront.resize(myWidth,myHeight);
+        //beingFront.resize(myWidth,myHeight);
         beingFront.draw(x, y);
         //ofRect(x,y,myWidth,myHeight);
 
