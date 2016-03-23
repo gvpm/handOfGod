@@ -7,19 +7,30 @@ Environment::Environment(){
     yearInMs = 1000;
     year = 0;
     gravity = 3.9;
+    wind = 0.5;
+    raining = false;
 
-
+    //Inicial beings
     for(int i = 0 ;i<10;i++){
     Being b;
     //b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs, beings);
     b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,gravity);
     beings.push_back(b);
     }
+    //Inicial trees
     for(int i = 0 ;i<3;i++){
     Tree t;
     t.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70);
     trees.push_back(t);
     }
+    //inicial clouds
+    for(int i = 0 ;i<ofRandom(4,15);i++){
+    Cloud c;
+    c.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,wind,gravity);
+    clouds.push_back(c);
+    }
+
+
     birthsToGive = 0;
 
 
@@ -27,6 +38,11 @@ Environment::Environment(){
 
 //--------------------------------------------------------------
 void Environment::update(){
+    ofBackground(160, 216, 241);
+    if(raining){
+        ofBackground(170, 226, 251);
+
+    }
 
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - startTime;
@@ -52,8 +68,9 @@ void Environment::update(){
 
     giveBirths();
 
-    updateBeings();
+    updateClouds();
 
+    updateBeings();
 
     updateTrees();
 
@@ -61,10 +78,13 @@ void Environment::update(){
 
 //--------------------------------------------------------------
 void Environment::draw(){
+
+
         ofSetColor(0,150,0);
         ofRect(0,ofGetHeight()-70,ofGetWidth(),70);
         //beings[4].draw();
 
+        drawClouds();
         drawTrees();
         drawBeings();
 
@@ -153,6 +173,22 @@ void Environment::updateTrees(){
     }
 
 }
+
+void Environment::drawClouds(){
+    for(int i = 0;i<clouds.size() ;i++){
+
+        clouds[i].draw();
+    }
+
+}
+void Environment::updateClouds(){
+    for(int i = 0;i<clouds.size() ;i++){
+
+        clouds[i].update();
+    }
+
+}
+
 void Environment::slowDown(){
     yearInMs = yearInMs*10;
     updateBeingsSpeed(yearInMs);
@@ -191,6 +227,28 @@ void Environment::impregnate(int percentage){
 
         }
     }
+
+
+}
+
+void Environment::rain(){
+    for(int i = 0 ;i<clouds.size();i++){
+
+            clouds[i].rain();
+
+    }
+    raining = true;
+
+
+}
+
+void Environment::stopRain(){
+    for(int i = 0 ;i<clouds.size();i++){
+
+            clouds[i].stopRain();
+
+    }
+    raining =false;
 
 
 }

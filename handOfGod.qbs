@@ -12,6 +12,10 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
+            "src/Cloud.cpp",
+            "src/Cloud.h",
+            "src/RainDrop.cpp",
+            "src/RainDrop.h",
             "src/Tree.cpp",
             "src/Tree.h",
             "src/Being.cpp",

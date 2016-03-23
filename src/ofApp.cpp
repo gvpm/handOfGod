@@ -114,6 +114,12 @@ void ofApp::keyPressed(int key){
     if(key == '0') {
        e.invertGravity();
     }
+    if(key == '6') {
+       e.rain();
+    }
+    if(key == '7') {
+       e.stopRain();
+    }
 
 
 
