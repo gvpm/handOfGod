@@ -120,6 +120,10 @@ void ofApp::keyPressed(int key){
     if(key == '7') {
        e.stopRain();
     }
+    if(key == '8') {
+       e.addMeteor();
+    }
+
 
 
 

@@ -74,6 +74,8 @@ void Environment::update(){
 
     updateTrees();
 
+    updateMeteors();
+
 }
 
 //--------------------------------------------------------------
@@ -87,6 +89,7 @@ void Environment::draw(){
         drawClouds();
         drawTrees();
         drawBeings();
+        drawMeteors();
 
         ofSetColor(0);
         string currentYear = ofToString(year);
@@ -119,6 +122,28 @@ void Environment::draw(){
                 ++j;
             }
         }
+
+
+        for(int i = meteors.size()-1;i>=0;i--){
+            if(!meteors[i].isAlive()){
+                float x = meteors[i].getX();
+                for(int z=0;z<beings.size();z++){
+                    float beingX = beings[z].getX();
+                   if (x < beingX && beingX < x+meteors[i].getWidth() &&beings[z].isAlive()){
+                       beings[z].kill();
+
+                   }
+
+                }
+                if (meteors[i].getYearsDead()>=2) {
+                                meteors.erase( meteors.begin() + i );
+                            }
+
+            }
+
+
+        }
+
 
 
 /*
@@ -185,6 +210,21 @@ void Environment::updateClouds(){
     for(int i = 0;i<clouds.size() ;i++){
 
         clouds[i].update();
+    }
+
+}
+
+void Environment::drawMeteors(){
+    for(int i = 0;i<meteors.size() ;i++){
+
+        meteors[i].draw();
+    }
+
+}
+void Environment::updateMeteors(){
+    for(int i = 0;i<meteors.size() ;i++){
+
+        meteors[i].update();
     }
 
 }
@@ -277,6 +317,14 @@ void Environment::addBeing(){
     Being b;
     b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,gravity);
     beings.push_back(b);
+
+
+}
+
+void Environment::addMeteor(){
+    Meteor m;
+    m.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs,gravity);
+    meteors.push_back(m);
 
 
 }

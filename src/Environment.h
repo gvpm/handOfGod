@@ -3,6 +3,7 @@
 #include "Being.h"
 #include "Tree.h"
 #include "Cloud.h"
+#include "Meteor.h"
 
 
 class Environment
@@ -18,6 +19,8 @@ public:
     void updateBeings();
     void updateClouds();
     void drawClouds();
+    void updateMeteors();
+    void drawMeteors();
 
     void updateBeingsSpeed(int ms);
     void speedUp();
@@ -31,6 +34,8 @@ public:
     void rain();
     void stopRain();
 
+    void addMeteor();
+
     void setGravity();
     void invertGravity();
 
@@ -40,6 +45,7 @@ public:
     vector<Being> beings;
     vector<Tree> trees;
     vector<Cloud> clouds;
+    vector<Meteor> meteors;
     //Being being();
 
     float wind;

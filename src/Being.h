@@ -19,6 +19,7 @@ public:
     void giveBirth();
     void removeChild();
     void killSlowly(int alives);
+    void kill();
 
     void makeInfertile();
     void makeFertile();

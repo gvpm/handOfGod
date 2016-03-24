@@ -422,6 +422,9 @@ void Being::makeFertile(){
 void Being::makeInfertile(){
     fertile = false;
 }
+void Being::kill(){
+    deathAge = age;
+}
 
 
 void Being::killSlowly(int alives){
