@@ -7,6 +7,9 @@ MenuTile::MenuTile(){
 void MenuTile::setup(string name){
 
     this-> name = name;
+
+
+
     tile.load(name+".png");
     myWidth = tile.getWidth();
 
@@ -61,7 +64,10 @@ void MenuTile::setPosition(float x, float y){
 
 }
 string MenuTile::getName(){
-
+    //Files can't have / on name
+    if(name== "StartStop Rain"){
+        return "Start/Stop Rain";
+    }
     return name;
 
 

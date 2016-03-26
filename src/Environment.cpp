@@ -92,8 +92,8 @@ void Environment::draw(){
         drawMeteors();
 
         ofSetColor(0);
-        string currentYear = ofToString(year);
-        font.drawString("Years Running: "+currentYear, ofGetWidth()-135, 25);
+        currentYear = ofToString(year);
+        //font.drawString("Years Running: "+currentYear, ofGetWidth()-135, 25);
         //vector <Being> beingsAux;
 
 
@@ -164,8 +164,8 @@ void Environment::draw(){
         //}
         */
 
-        string alivess = ofToString(alives);
-        font.drawString("Beings Alive: "+alivess, 30, 25);
+        alivess = ofToString(alives);
+        //font.drawString("Beings Alive: "+alivess, 30, 25);
 
 
 }
@@ -363,6 +363,14 @@ void Environment::giveBirths(){
 
 bool Environment::isRaining(){
     return raining;
+
+}
+string Environment::getCurrentYear(){
+    return currentYear;
+
+}
+string Environment::getAlives(){
+    return alivess;
 
 }
 

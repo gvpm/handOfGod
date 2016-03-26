@@ -80,6 +80,9 @@ public:
     float myWidth;
     float maxHeight;
     float maxWidth;
+    float childHeight;
+    float childWidth;
+
 
     float speed;
 
@@ -91,6 +94,12 @@ public:
     vector <ofImage> imagesRight;
     vector <ofImage> imagesLeft;
     vector <ofImage> imagesStandFront;
+
+    vector <ofImage> imagesRightChild;
+    vector <ofImage> imagesLeftChild;
+    ofImage beingFrontChild;
+
+
     vector <ofImage> imagesStandBack;
     ofImage beingFront;
     ofImage tomb;

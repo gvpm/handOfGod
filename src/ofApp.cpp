@@ -7,6 +7,7 @@ void ofApp::setup(){
     wheelValue = 50;
     lastAction = "No Action";
     lastWheelValue = 0;
+    topBar.load("topBar.png");
     //leap.open();
 
 }
@@ -25,22 +26,22 @@ void ofApp::update(){
 
                 string selection = menu.select();
                 if(selection == "Decimate") {
-                   e.decimate(50);
+                   e.decimate(wheelValue);
                    lastAction = "Decimate";
                    lastWheelValue = wheelValue;
                 }
                 if(selection == "Impregnate") {
-                   e.impregnate(50);
+                   e.impregnate(wheelValue);
                    lastAction = "Impregnate";
                    lastWheelValue = wheelValue;
                 }
                 if(selection == "Make Infertile") {
-                   e.makeInfertile(50);
+                   e.makeInfertile(wheelValue);
                    lastAction = "Make Infertile";
                    lastWheelValue = wheelValue;
                 }
                 if(selection == "Make Fertile") {
-                   e.makeFertile(50);
+                   e.makeFertile(wheelValue);
                    lastAction = "Make Fertile";
                    lastWheelValue = wheelValue;
                 }
@@ -54,15 +55,17 @@ void ofApp::update(){
                    lastAction = "Invert Gravity";
                    lastWheelValue = wheelValue;
                 }
-                if(selection == "Rain") {
-                   e.rain();
-                   lastAction = "Rain";
-                   lastWheelValue = wheelValue;
-                }
-                if(selection == "Stop Rain") {
-                   e.stopRain();
-                   lastAction = "Stop Rain";
-                   lastWheelValue = wheelValue;
+                if(selection == "Start/Stop Rain") {
+                   if(!e.isRaining()){
+                        e.rain();
+                        lastAction = "Rain";
+                        lastWheelValue = wheelValue;
+                   }else{
+                       e.stopRain();
+                       lastAction = "Stop Rain";
+                       lastWheelValue = wheelValue;
+
+                   }
                 }
                 if(selection == "Meteor") {
                    e.addMeteor();
@@ -82,11 +85,14 @@ void ofApp::update(){
 
                         if(direction == "right"){
                             menu.swipeRight();
+                            actionSelected = menu.select();
                             //e.decimate((int)wheelValue);
                             //lastAction = "Decimate";
                             //lastWheelValue = wheelValue;
 
                         }else if(direction == "left"){
+                            menu.swipeLeft();
+                            actionSelected = menu.select();
                            // e.impregnate((int)wheelValue);
                             //lastAction = "Impregnate";
                             //lastWheelValue = wheelValue;
@@ -107,19 +113,28 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
     e.draw();
     menu.draw();
-    ofSetColor(0);
+    ofSetColor(255);
+    topBar.draw(0,0);
+    ofSetColor(255);
     string sWheelValue = ofToString((int)wheelValue);
     string sLastWheelValue = ofToString((int)lastWheelValue);
-    font.drawString("WheelValue: "+sWheelValue, 300, 25);
+    font.drawString("Percentage For Action: "+sWheelValue+"%", 230, 30);
 
     if(lastAction=="Decimate" ||lastAction=="Impregnate" || lastAction=="Make Fertile" || lastAction=="Make Infertile" ){
 
-        font.drawString("Last Action: "+lastAction+" "+sLastWheelValue+ "% of the population.", 500, 25);
+        font.drawString("Last Action: "+lastAction+" "+sLastWheelValue+ "% of the population.", 500, 30);
     }else{
-        font.drawString("Last Action: "+lastAction, 500, 25);
+        font.drawString("Last Action: "+lastAction, 500, 30);
+
     }
+
+    font.drawString("Action Selected: "+actionSelected, 840, 30);
+
+    font.drawString("Years Running: "+e.getCurrentYear(), ofGetWidth()-135, 30);
+    font.drawString("Beings Alive: "+e.getAlives(), 40, 30);
 
 
 
@@ -157,26 +172,45 @@ void ofApp::keyPressed(int key){
     }
     */
 
+    if(key == OF_KEY_UP){
+        wheelValue++;
+        if(wheelValue>100){
+            wheelValue=100;
+        }
+
+
+
+    }
     if(key == OF_KEY_DOWN){
+        wheelValue--;
+        if(wheelValue<0){
+            wheelValue=0;
+        }
+
+
+
+    }
+
+    if(key == OF_KEY_TAB){
 
         string selection = menu.select();
         if(selection == "Decimate") {
-           e.decimate(50);
+           e.decimate(wheelValue);
            lastAction = "Decimate";
            lastWheelValue = wheelValue;
         }
         if(selection == "Impregnate") {
-           e.impregnate(50);
+           e.impregnate(wheelValue);
            lastAction = "Impregnate";
            lastWheelValue = wheelValue;
         }
         if(selection == "Make Infertile") {
-           e.makeInfertile(50);
+           e.makeInfertile(wheelValue);
            lastAction = "Make Infertile";
            lastWheelValue = wheelValue;
         }
         if(selection == "Make Fertile") {
-           e.makeFertile(50);
+           e.makeFertile(wheelValue);
            lastAction = "Make Fertile";
            lastWheelValue = wheelValue;
         }
@@ -221,12 +255,14 @@ void ofApp::keyPressed(int key){
 
     if(key == OF_KEY_RIGHT){
         menu.swipeRight();
+        actionSelected = menu.select();
                     //e.decimate((int)wheelValue);
                     //lastAction = "Decimate";
                     //lastWheelValue = wheelValue;
     }
     if(key == OF_KEY_LEFT){
          menu.swipeLeft();
+         actionSelected = menu.select();
                    // e.impregnate((int)wheelValue);
                     //lastAction = "Impregnate";
                     //lastWheelValue = wheelValue;

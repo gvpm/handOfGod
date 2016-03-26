@@ -11,6 +11,21 @@ Menu::Menu(){
     MenuTile m3;
     m3.setup("Decimate");
     tiles.push_back(m3);
+    MenuTile m4;
+    m4.setup("StartStop Rain");
+    tiles.push_back(m4);
+    MenuTile m5;
+    m5.setup("Make Infertile");
+    tiles.push_back(m5);
+    MenuTile m6;
+    m6.setup("Make Fertile");
+    tiles.push_back(m6);
+    MenuTile m7;
+    m7.setup("Impregnate");
+    tiles.push_back(m7);
+    MenuTile m8;
+    m8.setup("Invert Gravity");
+    tiles.push_back(m8);
 
 
     currentIndex = 0;
@@ -71,7 +86,7 @@ void Menu::draw(){
     }
 
 
-        if(currentTime-lastOpenTime>1000){
+        if(currentTime-lastOpenTime>2000){
             open = false;
 
         }

@@ -40,6 +40,12 @@ public:
     void setGravity();
     void invertGravity();
 
+    string getCurrentYear();
+    string getAlives();
+
+    string currentYear;
+    string alivess;
+
 
 
     ofTrueTypeFont		font;

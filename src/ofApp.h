@@ -31,10 +31,14 @@ public:
     string lastAction;
     int lastWheelValue;
 
+    string actionSelected;
+
     Environment e;
     Menu menu;
     ofxOscReceiver receiver;
     int wheelValue;
+
+    ofImage topBar;
 
 //ofxLeapMotion leap;
 

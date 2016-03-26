@@ -6,6 +6,10 @@ Being::Being(){
 
     ofDirectory dirRight;
     ofDirectory dirLeft;
+
+    ofDirectory dirRightChild;
+    ofDirectory dirLeftChild;
+
 //LOAD FRONT IMAGE
     beingFront.load("front.png");
 //LOAD TOMB IMAGE
@@ -43,6 +47,45 @@ Being::Being(){
     }
     else ofLog(OF_LOG_WARNING) << "Could not find folder";
 
+
+    //LOAD FRONT IMAGE Child
+        beingFrontChild.load("frontChild.png");
+
+
+    //LOAD RIGHT IMAGES Child
+        nFiles = dirRightChild.listDir("movingRightChild");
+        if(nFiles) {
+
+            for(int i=0; i<dirRightChild.size(); i++) {
+
+                // add the image to the vector
+                string filePath = dirRightChild.getPath(i);
+                imagesRightChild.push_back(ofImage());
+                imagesRightChild.back().load(filePath);
+
+            }
+
+        }
+        else ofLog(OF_LOG_WARNING) << "Could not find folder";
+
+    //LOAD LEFT IMAGES Child
+        nFiles = dirLeftChild.listDir("movingLeftChild");
+        if(nFiles) {
+
+            for(int i=0; i<dirLeftChild.size(); i++) {
+
+                // add the image to the vector
+                string filePath = dirLeftChild.getPath(i);
+                imagesLeftChild.push_back(ofImage());
+                imagesLeftChild.back().load(filePath);
+
+            }
+
+        }
+        else ofLog(OF_LOG_WARNING) << "Could not find folder";
+
+
+
     // this toggle will tell the sequence
     // be be indepent of the app fps
     bFrameIndependent = true;
@@ -55,8 +98,12 @@ Being::Being(){
     ofSetFrameRate(appFPS);
 //----------------------------------------------------
 //Inicial size setupus
-    maxHeight = 31;
-    maxWidth = 18;
+    //maxHeight = 31;
+    //maxWidth = 18;
+    maxHeight = beingFront.getHeight();
+    maxWidth= beingFront.getWidth();
+    childHeight = beingFrontChild.getHeight();
+    childWidth = beingFrontChild.getWidth();
     speed = 1;
     direction = 0;
     c.r=ofRandom(255);
@@ -103,6 +150,12 @@ void Being::update(){
 
     myHeight=maxHeight;
     myWidth = maxWidth;
+    if(age<5){
+        myHeight=childHeight;
+        myWidth = childWidth;
+
+
+    }
     //y=yLimit;
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
@@ -162,13 +215,13 @@ void Being::draw(){
     //ofRect(x,y,myWidth,myHeight);
 
     ofSetColor(255);
-    imagesRight[frameIndex].resize(myWidth,myHeight);
+    //imagesRight[frameIndex].resize(myWidth,myHeight);
 
 
     if(direction == -1){
         ofSetColor(255);
         if(age<5){
-           ofSetColor(0,0,255);
+           //ofSetColor(0,0,255);
         }
         if(!fertile){
            ofSetColor(0,255,0);
@@ -178,11 +231,15 @@ void Being::draw(){
             ofSetColor(255,0,0);
         }
         //imagesLeft[frameIndex].resize(myWidth,myHeight);
-        imagesLeft[frameIndex].draw(x, y);
+        if(age<5){
+            imagesLeftChild[frameIndex].draw(x, y);
+        }else{
+            imagesLeft[frameIndex].draw(x, y);
+        }
     }else if(direction == 1){
         ofSetColor(255);
         if(age<5){
-           ofSetColor(0,0,255);
+           //ofSetColor(0,0,255);
         }
         if(!fertile){
            ofSetColor(0,255,0);
@@ -190,12 +247,16 @@ void Being::draw(){
         if(isPregnant()){
            ofSetColor(255,0,0);
         }
-        //imagesRight[frameIndex].resize(myWidth,myHeight);
-        imagesRight[frameIndex].draw(x, y);
+        if(age<5){
+
+            imagesRightChild[frameIndex].draw(x, y);
+        }else{
+            imagesRight[frameIndex].draw(x, y);
+        }
     }else if (direction==0){
         ofSetColor(255);
         if(age<5){
-           ofSetColor(0,0,255);
+           //ofSetColor(0,0,255);
         }
         if(!fertile){
            ofSetColor(0,255,0);
@@ -204,7 +265,11 @@ void Being::draw(){
             ofSetColor(255,0,0);
         }
         //beingFront.resize(myWidth,myHeight);
-        beingFront.draw(x, y);
+        if(age<5){
+            beingFrontChild.draw(x, y);
+        }else{
+            beingFront.draw(x, y);
+        }
         //ofRect(x,y,myWidth,myHeight);
 
 
