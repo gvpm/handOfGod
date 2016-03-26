@@ -33,6 +33,7 @@ public:
     void addBeing();
     void rain();
     void stopRain();
+    bool isRaining();
 
     void addMeteor();
 

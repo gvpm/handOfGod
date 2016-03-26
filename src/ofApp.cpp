@@ -7,67 +7,96 @@ void ofApp::setup(){
     wheelValue = 50;
     lastAction = "No Action";
     lastWheelValue = 0;
+    //leap.open();
 
 }
 //--------------------------------------------------------------
 void ofApp::update(){
     e.update();
+    menu.update();
 
     while(receiver.hasWaitingMessages()){
             // get the next message
             ofxOscMessage m;
+
             receiver.getNextMessage(&m);
 
-            if(m.getAddress() == "/tap"){
-                        string pos = m.getArgAsString(0);
-                        if(pos == "center"){
-                            e.invertGravity();
-                            lastAction = "Invert Gravity";
+            if(m.getAddress() == "/keyTap"){
 
-                        }else if(pos ==  "north"){
+                string selection = menu.select();
+                if(selection == "Decimate") {
+                   e.decimate(50);
+                   lastAction = "Decimate";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Impregnate") {
+                   e.impregnate(50);
+                   lastAction = "Impregnate";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Make Infertile") {
+                   e.makeInfertile(50);
+                   lastAction = "Make Infertile";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Make Fertile") {
+                   e.makeFertile(50);
+                   lastAction = "Make Fertile";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Add Being") {
+                   e.addBeing();
+                   lastAction = "Add Being";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Invert Gravity") {
+                   e.invertGravity();
+                   lastAction = "Invert Gravity";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Rain") {
+                   e.rain();
+                   lastAction = "Rain";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Stop Rain") {
+                   e.stopRain();
+                   lastAction = "Stop Rain";
+                   lastWheelValue = wheelValue;
+                }
+                if(selection == "Meteor") {
+                   e.addMeteor();
+                   lastAction = "Meteor";
+                   lastWheelValue = wheelValue;
+                }
 
-                        }else if(pos ==  "east"){
 
-                        }else if(pos ==  "south"){
-                            e.addBeing();
-                            lastAction = "Add Being";
+                //e.addBeing();
+                //lastAction = "Add Being";
 
-                        }else if(pos ==  "west"){
+
+            }
+
+            if(m.getAddress() == "/swipe"){
+                        string direction = m.getArgAsString(0);
+
+                        if(direction == "right"){
+                            menu.swipeRight();
+                            //e.decimate((int)wheelValue);
+                            //lastAction = "Decimate";
+                            //lastWheelValue = wheelValue;
+
+                        }else if(direction == "left"){
+                           // e.impregnate((int)wheelValue);
+                            //lastAction = "Impregnate";
+                            //lastWheelValue = wheelValue;
 
                         }
 
             }
 
-            if(m.getAddress() == "/flick"){
-                        string from = m.getArgAsString(0);
-                        string to = m.getArgAsString(1);
-                        if(from == "west"&& to== "east"){
-                            e.decimate((int)wheelValue);
-                            lastAction = "Decimate";
-                            lastWheelValue = wheelValue;
 
-                        }else if(from == "east"&& to== "west"){
-                            e.impregnate((int)wheelValue);
-                            lastAction = "Impregnate";
-                            lastWheelValue = wheelValue;
-
-                        }else if(from == "north"&& to== "south"){
-                            e.makeInfertile((int)wheelValue);
-                            lastAction = "Make Infertile";
-                            lastWheelValue = wheelValue;
-
-
-                        }else if(from == "south"&& to== "north"){
-                            e.makeFertile((int)wheelValue);
-                            lastAction = "Make Fertile";
-                            lastWheelValue = wheelValue;
-
-                        }
-
-            }
-
-
-            if(m.getAddress() == "/airwheel"){
+            if(m.getAddress() == "/circle"){
                          wheelValue = m.getArgAsFloat(0);
 
 
@@ -79,6 +108,8 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     e.draw();
+    menu.draw();
+    ofSetColor(0);
     string sWheelValue = ofToString((int)wheelValue);
     string sLastWheelValue = ofToString((int)lastWheelValue);
     font.drawString("WheelValue: "+sWheelValue, 300, 25);
@@ -96,6 +127,7 @@ void ofApp::draw(){
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    /*
     if(key == '1') {
        e.decimate(50);
     }
@@ -123,6 +155,84 @@ void ofApp::keyPressed(int key){
     if(key == '8') {
        e.addMeteor();
     }
+    */
+
+    if(key == OF_KEY_DOWN){
+
+        string selection = menu.select();
+        if(selection == "Decimate") {
+           e.decimate(50);
+           lastAction = "Decimate";
+           lastWheelValue = wheelValue;
+        }
+        if(selection == "Impregnate") {
+           e.impregnate(50);
+           lastAction = "Impregnate";
+           lastWheelValue = wheelValue;
+        }
+        if(selection == "Make Infertile") {
+           e.makeInfertile(50);
+           lastAction = "Make Infertile";
+           lastWheelValue = wheelValue;
+        }
+        if(selection == "Make Fertile") {
+           e.makeFertile(50);
+           lastAction = "Make Fertile";
+           lastWheelValue = wheelValue;
+        }
+        if(selection == "Add Being") {
+           e.addBeing();
+           lastAction = "Add Being";
+           lastWheelValue = wheelValue;
+        }
+        if(selection == "Invert Gravity") {
+           e.invertGravity();
+           lastAction = "Invert Gravity";
+           lastWheelValue = wheelValue;
+        }
+        if(selection == "Start/Stop Rain") {
+           if(!e.isRaining()){
+                e.rain();
+                lastAction = "Rain";
+                lastWheelValue = wheelValue;
+           }else{
+               e.stopRain();
+               lastAction = "Stop Rain";
+               lastWheelValue = wheelValue;
+
+           }
+        }
+
+        if(selection == "Meteor") {
+           e.addMeteor();
+           lastAction = "Meteor";
+           lastWheelValue = wheelValue;
+        }
+
+
+        //e.addBeing();
+        //lastAction = "Add Being";
+
+
+    }
+
+
+
+
+    if(key == OF_KEY_RIGHT){
+        menu.swipeRight();
+                    //e.decimate((int)wheelValue);
+                    //lastAction = "Decimate";
+                    //lastWheelValue = wheelValue;
+    }
+    if(key == OF_KEY_LEFT){
+         menu.swipeLeft();
+                   // e.impregnate((int)wheelValue);
+                    //lastAction = "Impregnate";
+                    //lastWheelValue = wheelValue;
+    }
+
+
 
 
 

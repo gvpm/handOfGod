@@ -361,3 +361,8 @@ void Environment::giveBirths(){
     }
 }
 
+bool Environment::isRaining(){
+    return raining;
+
+}
+

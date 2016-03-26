@@ -3,7 +3,7 @@
 Meteor::Meteor(){
 
     ofDirectory meteorFire;
-    meteor.load("meteor.png");
+    meteor.load("meteorRock.png");
 
 //LOAD RIGHT IMAGES
     int nFiles = meteorFire.listDir("meteorFire");

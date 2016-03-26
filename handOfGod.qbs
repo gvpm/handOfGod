@@ -12,6 +12,10 @@ Project{
         name: { return FileInfo.baseName(path) }
 
         files: [
+            "src/Menu.cpp",
+            "src/Menu.h",
+            "src/MenuTile.cpp",
+            "src/MenuTile.h",
             "src/Meteor.cpp",
             "src/Meteor.h",
             "src/Cloud.cpp",
@@ -30,7 +34,7 @@ Project{
         ]
 
         of.addons: [
-            'ofxOsc'
+            'ofxOsc','ofxLeapMotion2'
         ]
 
         // additional flags for the project. the of module sets some

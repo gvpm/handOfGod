@@ -3,6 +3,9 @@
 #include "ofMain.h"
 #include "Environment.h"
 #include "ofxOsc.h"
+#include "Menu.h"
+//#include "ofxLeapMotion2.h"
+
 
 
 class ofApp : public ofBaseApp{
@@ -29,9 +32,11 @@ public:
     int lastWheelValue;
 
     Environment e;
+    Menu menu;
     ofxOscReceiver receiver;
     int wheelValue;
 
+//ofxLeapMotion leap;
 
 
 };
