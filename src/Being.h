@@ -62,6 +62,8 @@ public:
     int timeElapsed;
     int yearsDead;
 
+    int youngAge;
+
     bool fertile;
     bool alive;
     bool pregnant;

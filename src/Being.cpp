@@ -138,6 +138,7 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     yearsDead =0;
     fertile = true;
     this->gravity=gravity;
+    youngAge = 12;
 
 
 
@@ -150,7 +151,7 @@ void Being::update(){
 
     myHeight=maxHeight;
     myWidth = maxWidth;
-    if(age<5){
+    if(age<youngAge){
         myHeight=childHeight;
         myWidth = childWidth;
 
@@ -220,34 +221,34 @@ void Being::draw(){
 
     if(direction == -1){
         ofSetColor(255);
-        if(age<5){
-           //ofSetColor(0,0,255);
+        if(age<youngAge){
+           ofSetColor(238,232,170);
         }
         if(!fertile){
-           ofSetColor(0,255,0);
+           ofSetColor(178,255,102);
         }
 
         if(isPregnant()){
-            ofSetColor(255,0,0);
+            ofSetColor(255,102,102);
         }
         //imagesLeft[frameIndex].resize(myWidth,myHeight);
-        if(age<5){
+        if(age<youngAge){
             imagesLeftChild[frameIndex].draw(x, y);
         }else{
             imagesLeft[frameIndex].draw(x, y);
         }
     }else if(direction == 1){
         ofSetColor(255);
-        if(age<5){
-           //ofSetColor(0,0,255);
+        if(age<youngAge){
+           ofSetColor(238,232,170);
         }
         if(!fertile){
-           ofSetColor(0,255,0);
+           ofSetColor(178,255,102);
         }
         if(isPregnant()){
-           ofSetColor(255,0,0);
+           ofSetColor(255,102,102);
         }
-        if(age<5){
+        if(age<youngAge){
 
             imagesRightChild[frameIndex].draw(x, y);
         }else{
@@ -255,17 +256,17 @@ void Being::draw(){
         }
     }else if (direction==0){
         ofSetColor(255);
-        if(age<5){
-           //ofSetColor(0,0,255);
+        if(age<youngAge){
+           ofSetColor(238,232,170);
         }
         if(!fertile){
-           ofSetColor(0,255,0);
+           ofSetColor(178,255,102);
         }
         if(isPregnant()){
-            ofSetColor(255,0,0);
+            ofSetColor(255,102,102);
         }
         //beingFront.resize(myWidth,myHeight);
-        if(age<5){
+        if(age<youngAge){
             beingFrontChild.draw(x, y);
         }else{
             beingFront.draw(x, y);

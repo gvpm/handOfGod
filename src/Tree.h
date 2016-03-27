@@ -38,5 +38,6 @@ public:
     int maxNOfApples;
     vector <ofPoint> applePositions;
     ofImage tree;
+    ofImage apple;
 
 };
