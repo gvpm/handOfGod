@@ -1,6 +1,6 @@
 {
   "name": "HandOfGod",
   "tagline": "Control a virtual environment with the palm of your hand.",
-  "body": "![](https://github.com/gvpm/handOfGod/blob/master/Example.png)",
+  "body": "# handOfGod\r\nControl a virtual environment with the palm of your hand.\r\n\r\nOpenFrameworks @ QtCreator\r\n\r\n![alt tag](https://github.com/gvpm/handOfGod/blob/master/Example.png)\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
