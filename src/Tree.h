@@ -8,7 +8,7 @@ public:
     Tree();
 
 
-    void setup(float height,float width,float floor);
+    void setup(float height,float width,float floor,int yearInMs);
     void update();
     void draw();
 
@@ -21,7 +21,12 @@ public:
     float getX();
     float getY();
     int getDirection();
+
+    float getWidth();
     float getSpeed();
+    bool eatApple();
+
+    bool isEmpty();
 
     //
 
@@ -39,5 +44,15 @@ public:
     vector <ofPoint> applePositions;
     ofImage tree;
     ofImage apple;
+
+    int currentTime;
+    int birthTime;
+    int age;
+    int timeElapsed;
+    int yearInMs;
+    int lastAge;
+    bool empty;
+
+
 
 };

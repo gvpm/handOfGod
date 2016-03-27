@@ -20,7 +20,7 @@ Environment::Environment(){
     //Inicial trees
     for(int i = 0 ;i<3;i++){
     Tree t;
-    t.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70);
+    t.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs);
     trees.push_back(t);
     }
     //inicial clouds
@@ -38,6 +38,8 @@ Environment::Environment(){
 
 //--------------------------------------------------------------
 void Environment::update(){
+
+
     ofBackground(160, 216, 241);
     if(raining){
         ofBackground(170, 226, 251);
@@ -64,7 +66,7 @@ void Environment::update(){
 
     }
  */
-
+    guideStarving();
 
     giveBirths();
 
@@ -371,6 +373,21 @@ string Environment::getCurrentYear(){
 }
 string Environment::getAlives(){
     return alivess;
+
+}
+
+void Environment::guideStarving(){
+
+    for(int i = 0 ;i<beings.size();i++){
+        if(beings[i].isStarving()){
+            beings[i].setCloseTreeX(trees[0].getX());
+            beings[i].setCloseTree(trees[0]);
+
+
+        }
+
+    }
+
 
 }
 

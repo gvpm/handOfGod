@@ -40,6 +40,8 @@ public:
     void setGravity();
     void invertGravity();
 
+    void guideStarving();
+
     string getCurrentYear();
     string getAlives();
 
@@ -66,5 +68,6 @@ public:
     int alives;
 
     bool raining;
+
 
 };

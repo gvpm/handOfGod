@@ -139,6 +139,7 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     fertile = true;
     this->gravity=gravity;
     youngAge = 12;
+    starving = false;
 
 
 
@@ -171,7 +172,7 @@ void Being::update(){
 
     if(alive){
 
-        if(ofRandom(10000)>9997 && !isPregnant()&& age>12){
+        if(ofRandom(10000)>9997 && !isPregnant()&& age>youngAge){
             impregnate();
 
         }
@@ -294,6 +295,8 @@ void Being::draw(){
 void Being::move(){
     //y = floor-myHeight;
 
+
+
     y = y+gravity;
     if(y>floor-myHeight){
       y = floor-myHeight;
@@ -334,14 +337,28 @@ void Being::move(){
 }
 
 void Being::changeDirection(){
+
     if(y<floor-myHeight){
         direction = 0;
-    }
+    }else if(starving){
+        float treeX = closeTree.getX();
+        if(treeX-x>2){
+            setDirection(1);
+        }else if(treeX-x<-2){
+            setDirection(-1);
+        }else{
+            setDirection(0);
+            if(closeTree.eatApple()){
+                starving =  false;
+            }
 
-    if(ofRandom(1000)>990){
+        }
+
+
+    }else if(ofRandom(1000)>990){
     float random = ofRandom(1000);
         if(random<333){
-            setDirection(1);
+
 
         }else if(random<666){
             setDirection(-1);
@@ -351,6 +368,9 @@ void Being::changeDirection(){
         }
 
     }
+
+
+
 
 }
 
@@ -452,7 +472,7 @@ bool Being::isPregnant(){
     return pregnant;
 }
 void Being::impregnate(){
-    if(fertile){
+    if(fertile&&age>youngAge){
     pregAge=age;
     pregnant = true;
     }
@@ -503,6 +523,22 @@ void Being::killSlowly(int alives){
     //deathAge = age;
 
 }
+
+void Being::setCloseTreeX(float  x){
+    closeTreeX = x;
+
+}
+
+void Being::setCloseTree(Tree  t){
+    closeTree = t;
+
+}
+
+bool Being::isStarving(){
+    return starving;
+
+}
+
 
 
 

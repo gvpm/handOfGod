@@ -1,5 +1,7 @@
 #pragma once
 #include "ofMain.h"
+#include "Tree.h"
+
 
 class Being
 {
@@ -23,7 +25,10 @@ public:
 
     void makeInfertile();
     void makeFertile();
+    void setCloseTreeX(float x);
 
+    void setCloseTree(Tree t);
+    Tree closeTree;
 
 
     //Gets and Sets
@@ -46,8 +51,15 @@ public:
 
 
 
+    bool isStarving();
+
+
+
+
 
     //
+    float closeTreeX;
+
     bool  childReady;
     int pregAge;
     ofImage walking;
@@ -107,6 +119,8 @@ public:
     ofImage tomb;
     vector <Being> beings;
     int id;
+
+    bool starving;
 
 
 };
