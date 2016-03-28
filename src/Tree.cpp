@@ -7,7 +7,7 @@ c.r=ofRandom(0);
 c.g=ofRandom(255);
 c.b=ofRandom(0);
 
-maxNOfApples=15;
+maxNOfApples=20;
 tree.load("tree.png");
 
 myHeight = 100;
@@ -60,6 +60,10 @@ void Tree::update(){
             applePoint.x=ofRandom(x+12,x+myWidth-20);
             applePoint.y = ofRandom(y+15,y+myHeight-50);
             applePositions.push_back(applePoint);
+            ofPoint applePoint2;
+            applePoint2.x=ofRandom(x+12,x+myWidth-20);
+            applePoint2.y = ofRandom(y+15,y+myHeight-50);
+            applePositions.push_back(applePoint2);
 
         }
 
@@ -128,19 +132,30 @@ bool Tree::isEmpty(){
 
 }
 
-bool Tree::eatApple(){
-    if(!empty){
-       applePositions.clear();
+void Tree::eatApple(){
 
-    return true;
-    }else{
-        return false;
-    }
+     applePositions.pop_back();
+     if(applePositions.size()>0){
+         empty= false;
+     }else{
+         empty  = true;
+     }
+
+
 
 }
 
 float Tree::getWidth(){
     return myWidth;
+
+}
+
+int Tree::getMaxNOfApples(){
+    return maxNOfApples;
+
+}
+int Tree::getNOfApples(){
+    return applePositions.size();
 
 }
 

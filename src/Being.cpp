@@ -15,6 +15,15 @@ Being::Being(){
 //LOAD TOMB IMAGE
     tomb.load("tomb.png");
 
+    //LOAD FRONT IMAGE Child
+        beingFrontChild.load("frontChild.png");
+
+        beingBackChild.load("backChild.png");
+
+        beingBack.load("back.png");
+
+
+
 //LOAD RIGHT IMAGES
     int nFiles = dirRight.listDir("movingRight");
     if(nFiles) {
@@ -48,8 +57,7 @@ Being::Being(){
     else ofLog(OF_LOG_WARNING) << "Could not find folder";
 
 
-    //LOAD FRONT IMAGE Child
-        beingFrontChild.load("frontChild.png");
+
 
 
     //LOAD RIGHT IMAGES Child
@@ -106,6 +114,7 @@ Being::Being(){
     childWidth = beingFrontChild.getWidth();
     speed = 1;
     direction = 0;
+
     c.r=ofRandom(255);
     c.g=ofRandom(255);
     c.b=ofRandom(255);
@@ -140,6 +149,17 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     this->gravity=gravity;
     youngAge = 12;
     starving = false;
+    closeTreeX = -1;
+
+    agesWithoutMeal =0;
+    agesStarving = 0;
+    ageOfLastMeal = 0;
+    lastAgeChecked = 0;
+
+    eatEveryXAges=5;
+    maxAgesStarving=20;
+
+    treeLock = false;
 
 
 
@@ -156,12 +176,15 @@ void Being::update(){
         myHeight=childHeight;
         myWidth = childWidth;
 
-
     }
     //y=yLimit;
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
     age = timeElapsed/yearInMs;
+
+
+
+
 
 
 
@@ -171,6 +194,26 @@ void Being::update(){
     }
 
     if(alive){
+        if(lastAgeChecked!=age){
+            agesWithoutMeal = age-ageOfLastMeal;
+            if(agesWithoutMeal>eatEveryXAges){
+                if(!starving){
+                starving=true;
+                }
+                agesStarving = agesWithoutMeal-eatEveryXAges;
+            }
+            if(agesStarving>maxAgesStarving){
+                //if(alive){
+                deathAge --;
+                killedByStarvation = true;
+                //}
+            }
+
+        }
+
+        lastAgeChecked = age;
+
+
 
         if(ofRandom(10000)>9997 && !isPregnant()&& age>youngAge){
             impregnate();
@@ -190,6 +233,8 @@ void Being::update(){
         yearsDead = age-deathAge;
 
     }
+
+
 
 
 
@@ -268,9 +313,20 @@ void Being::draw(){
         }
         //beingFront.resize(myWidth,myHeight);
         if(age<youngAge){
-            beingFrontChild.draw(x, y);
+            if(onTree){
+                beingBackChild.draw(x,y);
+            }else{
+                beingFrontChild.draw(x, y);
+            }
+
         }else{
-            beingFront.draw(x, y);
+            if(onTree){
+                beingBack.draw(x,y);
+
+            }else{
+                beingFront.draw(x, y);
+            }
+
         }
         //ofRect(x,y,myWidth,myHeight);
 
@@ -281,6 +337,9 @@ void Being::draw(){
     //DRAW WHEN DEAD
     }else{
         ofSetColor(255);
+        if(killedByStarvation){
+            ofSetColor(200);
+        }
         myHeight = 26;
         y = floor-myHeight;
         tomb.draw(x,y+2);
@@ -339,23 +398,32 @@ void Being::move(){
 void Being::changeDirection(){
 
     if(y<floor-myHeight){
+        onTree=false;
         direction = 0;
-    }else if(starving){
-        float treeX = closeTree.getX();
-        if(treeX-x>2){
+    }else if(starving && closeTreeX !=-1){
+        //float treeX = closeTree.getX();
+        //onTree=false;
+        float treeX = closeTreeX;
+        float rand = ofRandom(2,10);
+        if((treeX+40)-x>2){
             setDirection(1);
-        }else if(treeX-x<-2){
+            onTree=false;
+        }else if((treeX+40)-x<-2){
             setDirection(-1);
+            onTree=false;
         }else{
             setDirection(0);
+            onTree = true;
+            /*
             if(closeTree.eatApple()){
                 starving =  false;
             }
-
+            */
         }
 
 
     }else if(ofRandom(1000)>990){
+        onTree=false;
     float random = ofRandom(1000);
         if(random<333){
 
@@ -510,6 +578,7 @@ void Being::makeInfertile(){
 }
 void Being::kill(){
     deathAge = age;
+
 }
 
 
@@ -525,7 +594,12 @@ void Being::killSlowly(int alives){
 }
 
 void Being::setCloseTreeX(float  x){
+    treeLock = true;
     closeTreeX = x;
+
+}
+bool Being:: isTreeLock(){
+    return treeLock;
 
 }
 
@@ -538,6 +612,42 @@ bool Being::isStarving(){
     return starving;
 
 }
+void Being::feed(){
+    starving = false;
+    ageOfLastMeal=age;
+
+}
+
+bool Being::isOnTree(){
+    return onTree;
+
+
+}
+float Being::getCloseTreeX(){
+    return closeTreeX;
+
+}
+
+int Being::getMaxAgesStarving(){
+    return maxAgesStarving;
+}
+
+int Being::getAgesStarving(){
+    return agesStarving;
+
+}
+
+void Being::setGaveUpX(float x){
+    gaveUpX = x;
+
+
+}
+float Being::getGaveUpX(){
+    return gaveUpX;
+
+
+}
+
 
 
 

@@ -24,9 +24,12 @@ public:
 
     float getWidth();
     float getSpeed();
-    bool eatApple();
+    void eatApple();
 
     bool isEmpty();
+
+    int getMaxNOfApples();
+    int getNOfApples();
 
     //
 

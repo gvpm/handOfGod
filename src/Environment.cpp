@@ -67,6 +67,7 @@ void Environment::update(){
     }
  */
     guideStarving();
+    feedStarving();
 
     giveBirths();
 
@@ -115,7 +116,7 @@ void Environment::draw(){
 
         int j= 0;
         while ( j < beings.size() ) {
-            if ( !beings[j].isAlive() /*&& (year%1==0)*/ &&beings[j].getYearsDead()>=5) {
+            if ( !beings[j].isAlive()  && beings[j].getYearsDead()>=5 ||!beings[j].isAlive()  && beings[j].getAgesStarving()>=beings[j].getMaxAgesStarving()+5) {
                 beings.erase( beings.begin() + j );
             } else if (beings[j].isAlive()) {
                 ++j;
@@ -380,8 +381,77 @@ void Environment::guideStarving(){
 
     for(int i = 0 ;i<beings.size();i++){
         if(beings[i].isStarving()){
-            beings[i].setCloseTreeX(trees[0].getX());
-            beings[i].setCloseTree(trees[0]);
+            float x = discoverCloseTreeX(beings[i].getX());
+
+            if(!beings[i].isTreeLock()){
+            beings[i].setCloseTreeX(x);
+            }
+            /*
+            if(x <0){
+                float index = abs(x);
+                if(index+1>trees.size()-1){
+                    beings[i].setCloseTreeX(trees[index-1].getX());
+                }else{
+                    beings[i].setCloseTreeX(trees[index+1].getX());
+                }
+
+            }else{
+
+            }
+            //beings[i].setCloseTree(trees[0]);
+*/
+
+        }
+
+    }
+
+
+}
+float Environment::discoverCloseTreeX(float x){
+
+    float index = ofRandom(0,trees.size());
+    return trees[index].getX();
+
+    /*
+    float closest = ofGetWidth();
+    float r;
+    float closeIndex;
+    for(int j = 0 ;j<trees.size();j++){
+        float dist = abs(trees[j].getX()-x);
+        if(dist<closest && !trees[j].isEmpty()){
+            closest = dist;
+            r = trees[j].getX();
+            closeIndex = j;
+
+        }
+
+
+
+    }
+    if (trees[closeIndex].getNOfApples()<=3 && ofRandom(100)>50){
+        return -closeIndex;
+    }
+    return r;
+    */
+
+
+}
+
+void Environment::feedStarving(){
+
+    for(int i = 0 ;i<beings.size();i++){
+        if(beings[i].isStarving() && beings[i].isOnTree()){
+            for(int j = 0 ;j<trees.size();j++){
+                if(trees[j].getX()==beings[i].getCloseTreeX()){
+                    if(!trees[j].isEmpty()){
+                        trees[j].eatApple();
+                        beings[i].feed();
+                    }
+
+                }
+
+            }
+
 
 
         }

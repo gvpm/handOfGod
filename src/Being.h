@@ -26,9 +26,32 @@ public:
     void makeInfertile();
     void makeFertile();
     void setCloseTreeX(float x);
+    float closeTreeX;
+    float getCloseTreeX();
+
+    void feed();
+    bool onTree;
+    bool isOnTree();
+
+    bool treeLock;
+    bool isTreeLock();
+
+    bool killedByStarvation;
 
     void setCloseTree(Tree t);
     Tree closeTree;
+
+    int agesWithoutMeal;
+    int agesStarving;
+    int ageOfLastMeal;
+    int lastAgeChecked;
+    int eatEveryXAges;
+
+    int maxAgesStarving;
+    int getMaxAgesStarving();
+    int getAgesStarving();
+
+
 
 
     //Gets and Sets
@@ -53,12 +76,16 @@ public:
 
     bool isStarving();
 
+    float gaveUpX;
+    float getGaveUpX();
+    void setGaveUpX(float x);
+
 
 
 
 
     //
-    float closeTreeX;
+    //float closeTreeX;
 
     bool  childReady;
     int pregAge;
@@ -112,6 +139,9 @@ public:
     vector <ofImage> imagesRightChild;
     vector <ofImage> imagesLeftChild;
     ofImage beingFrontChild;
+
+    ofImage beingBackChild;
+    ofImage beingBack;
 
 
     vector <ofImage> imagesStandBack;

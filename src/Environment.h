@@ -41,6 +41,8 @@ public:
     void invertGravity();
 
     void guideStarving();
+    void feedStarving();
+    float discoverCloseTreeX(float x);
 
     string getCurrentYear();
     string getAlives();
