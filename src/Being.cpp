@@ -156,8 +156,8 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     ageOfLastMeal = 0;
     lastAgeChecked = 0;
 
-    eatEveryXAges=5;
-    maxAgesStarving=20;
+    eatEveryXAges=10;
+    maxAgesStarving=30;
 
     treeLock = false;
 
@@ -205,6 +205,10 @@ void Being::update(){
             if(agesStarving>maxAgesStarving){
                 //if(alive){
                 deathAge --;
+                if(deathAge<=age){
+                    //deathAge = age;
+                    kill();
+                }
                 killedByStarvation = true;
                 //}
             }
@@ -594,8 +598,12 @@ void Being::killSlowly(int alives){
 }
 
 void Being::setCloseTreeX(float  x){
+    if(x!=-1){
     treeLock = true;
     closeTreeX = x;
+    }else{
+        closeTreeX = x;
+    }
 
 }
 bool Being:: isTreeLock(){
@@ -645,6 +653,10 @@ void Being::setGaveUpX(float x){
 float Being::getGaveUpX(){
     return gaveUpX;
 
+
+}
+void Being::removeTreeLock(){
+    treeLock = false;
 
 }
 

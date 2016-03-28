@@ -39,6 +39,7 @@ public:
 
     void setGravity();
     void invertGravity();
+    void removeLock(float x);
 
     void guideStarving();
     void feedStarving();
@@ -70,6 +71,8 @@ public:
     int alives;
 
     bool raining;
+
+    int maxNOfTrees;
 
 
 };

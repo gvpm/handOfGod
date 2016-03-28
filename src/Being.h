@@ -51,6 +51,8 @@ public:
     int getMaxAgesStarving();
     int getAgesStarving();
 
+    void removeTreeLock();
+
 
 
 

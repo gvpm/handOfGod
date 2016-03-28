@@ -32,7 +32,7 @@ void Cloud::setup(float height,float width,float floor,int yearInMs,float wind,f
 
 void Cloud::update(){
     if(raining){
-        for(int i = 0; i<20;i++){
+        for(int i = 0; i<10;i++){
             RainDrop rd;
             rd.setup(ofRandom(x,x+myWidth),y+myHeight/2,gravity,wind,floor);
             rainDrops.push_back(rd);

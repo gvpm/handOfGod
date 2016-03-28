@@ -9,6 +9,7 @@ Environment::Environment(){
     gravity = 3.9;
     wind = 0.5;
     raining = false;
+    maxNOfTrees = 10;
 
     //Inicial beings
     for(int i = 0 ;i<10;i++){
@@ -18,7 +19,7 @@ Environment::Environment(){
     beings.push_back(b);
     }
     //Inicial trees
-    for(int i = 0 ;i<3;i++){
+    for(int i = 0 ;i<1;i++){
     Tree t;
     t.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs);
     trees.push_back(t);
@@ -79,6 +80,13 @@ void Environment::update(){
 
     updateMeteors();
 
+    if(raining&&ofRandom(1000)>990&&trees.size()<maxNOfTrees){
+        Tree t;
+        t.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs);
+        trees.push_back(t);
+
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -138,6 +146,20 @@ void Environment::draw(){
                    }
 
                 }
+
+                 j= 0;
+                while ( j < trees.size() ) {
+                    float treeX = trees[i].getX();
+                    if (x < treeX && treeX < x+meteors[i].getWidth()) {
+                        trees.erase( trees.begin() + j );
+                        removeLock(treeX);
+                    } else{
+                        ++j;
+                    }
+                }
+
+
+
                 if (meteors[i].getYearsDead()>=2) {
                                 meteors.erase( meteors.begin() + i );
                             }
@@ -407,10 +429,26 @@ void Environment::guideStarving(){
 
 
 }
-float Environment::discoverCloseTreeX(float x){
 
+void Environment:: removeLock(float x){
+    for(int i = 0 ;i<beings.size();i++){
+        if(beings[i].isAlive() && beings[i].isTreeLock() && beings[i].getCloseTreeX()==x){
+            beings[i].removeTreeLock();
+            beings[i].setCloseTreeX(-1);
+        }
+
+    }
+
+
+}
+
+float Environment::discoverCloseTreeX(float x){
+    if(trees.size()>0){
     float index = ofRandom(0,trees.size());
     return trees[index].getX();
+    }else{
+        return -1;
+    }
 
     /*
     float closest = ofGetWidth();
