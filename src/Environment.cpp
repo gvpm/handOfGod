@@ -149,14 +149,16 @@ void Environment::draw(){
 
                  j= 0;
                 while ( j < trees.size() ) {
-                    float treeX = trees[i].getX();
-                    if (x < treeX && treeX < x+meteors[i].getWidth()) {
-                        trees.erase( trees.begin() + j );
+                    float treeX = trees[j].getX();
+                    if (x < treeX+trees[j].getWidth()/2 && treeX+trees[j].getWidth()/2 < x+meteors[i].getWidth()) {
+                        trees.erase(trees.begin() + j );
                         removeLock(treeX);
                     } else{
                         ++j;
                     }
                 }
+
+
 
 
 

@@ -430,7 +430,7 @@ void Being::changeDirection(){
         onTree=false;
     float random = ofRandom(1000);
         if(random<333){
-
+            setDirection(1);
 
         }else if(random<666){
             setDirection(-1);
