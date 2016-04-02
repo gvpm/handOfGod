@@ -7,7 +7,7 @@ class Being
 {
 public:
     Being();
-    //void setup(float height,float width,float floor,int yearInMs, vector <Being> &);
+
     void setup(float height,float width,float floor,int yearInMs,float gravity);
     void update();
     void draw();
@@ -24,21 +24,18 @@ public:
     void kill();
 
     void makeInfertile();
-    void makeFertile();
-    void setCloseTreeX(float x);
-    float closeTreeX;
-    float getCloseTreeX();
+    void makeFertile();    
 
     void feed();
-    bool onTree;
     bool isOnTree();
-
-    bool treeLock;
     bool isTreeLock();
+    bool isStarving();
 
+    void removeTreeLock();
+    bool onTree;
+    bool treeLock;    
     bool killedByStarvation;
-
-    void setCloseTree(Tree t);
+    float closeTreeX;
     Tree closeTree;
 
     int agesWithoutMeal;
@@ -48,51 +45,59 @@ public:
     int eatEveryXAges;
 
     int maxAgesStarving;
-    int getMaxAgesStarving();
-    int getAgesStarving();
-
-    void removeTreeLock();
 
 
-
-
-    //Gets and Sets
+///GETS AND SETS
 
 
     void setX(float x);
     void setY(float x);
     void setYearInMs(int i);
-    float getX();
-    float getY();
     void setDirection(int d);
-    int getDirection();
     void setSpeed(float s);
+    void setGravity(float gravity);
+    void setGaveUpX(float x);
+    void setCloseTreeX(float x);
+    void setCloseTree(Tree t);
+
+    float getX();
+    float getY();    
+    int getDirection();    
     float getSpeed();
     float getMyHeight();
     float getMyWidth();
-    int getYearsDead();
-    void setGravity(float gravity);
+    int getYearsDead();    
+    float getGaveUpX();
+    int getMaxAgesStarving();
+    int getAgesStarving();
+    float getCloseTreeX();
 
 
+///
+
+    ofImage walking;
+    ofImage stop;
+    ofImage beingFrontChild;
+    ofImage beingBackChild;
+    ofImage beingBack;
+    ofImage beingFront;
+    ofImage tomb;
+
+    vector <ofImage> imagesRight;
+    vector <ofImage> imagesLeft;
+    vector <ofImage> imagesStandFront;
+    vector <ofImage> imagesRightChild;
+    vector <ofImage> imagesLeftChild;
+    vector <ofImage> imagesStandBack;
+    vector <Being> beings;
 
 
-    bool isStarving();
 
     float gaveUpX;
-    float getGaveUpX();
-    void setGaveUpX(float x);
-
-
-
-
-
-    //
-    //float closeTreeX;
 
     bool  childReady;
     int pregAge;
-    ofImage walking;
-    ofImage stop;
+
     int currentTime;
     int birthTime;
     int deathTime;
@@ -125,8 +130,6 @@ public:
     float maxWidth;
     float childHeight;
     float childWidth;
-
-
     float speed;
 
     ofColor c;
@@ -134,22 +137,7 @@ public:
     int   appFPS;
     float sequenceFPS;
     bool  bFrameIndependent;
-    vector <ofImage> imagesRight;
-    vector <ofImage> imagesLeft;
-    vector <ofImage> imagesStandFront;
 
-    vector <ofImage> imagesRightChild;
-    vector <ofImage> imagesLeftChild;
-    ofImage beingFrontChild;
-
-    ofImage beingBackChild;
-    ofImage beingBack;
-
-
-    vector <ofImage> imagesStandBack;
-    ofImage beingFront;
-    ofImage tomb;
-    vector <Being> beings;
     int id;
 
     bool starving;

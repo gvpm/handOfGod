@@ -16,16 +16,26 @@ public:
     void drawRainDrops();
     void updateRainDrops();
 
-    void setX(float x);
-    void setY(float x);
-    void setYearInMs(int i);
-    float getX();
-    float getY();
-    void setWind(float wind);
-
     bool isRaining();
     void rain();
     void stopRain();
+
+///GETS AND SETS
+
+    float getX();
+    float getY();
+
+    void setX(float x);
+    void setY(float x);
+    void setYearInMs(int i);
+    void setWind(float wind);
+
+
+
+
+///
+    ofImage cloud;
+    vector<RainDrop> rainDrops;
 
     float height;
     float width;
@@ -39,11 +49,11 @@ public:
 
     bool raining;
 
-     ofImage cloud;
-     float x;
-     float y;
 
-     vector<RainDrop> rainDrops;
+    float x;
+    float y;
+
+
 
 
 

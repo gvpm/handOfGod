@@ -1,7 +1,6 @@
 #include "Being.h"
 
 Being::Being(){
-//----------------------------------------------------
 
 
     ofDirectory dirRight;
@@ -56,10 +55,6 @@ Being::Being(){
     }
     else ofLog(OF_LOG_WARNING) << "Could not find folder";
 
-
-
-
-
     //LOAD RIGHT IMAGES Child
         nFiles = dirRightChild.listDir("movingRightChild");
         if(nFiles) {
@@ -104,7 +99,7 @@ Being::Being(){
     sequenceFPS = 10;
     appFPS = 60;
     ofSetFrameRate(appFPS);
-//----------------------------------------------------
+
 //Inicial size setupus
     //maxHeight = 31;
     //maxWidth = 18;
@@ -122,9 +117,12 @@ Being::Being(){
 
 
 }
-//--------------------------------------------------------------
 
-//void Being::setup(float height,float width,float floor,int yearInMs,vector<Being> &_beings){
+///////////////////////////////////////////////////////
+///SETUP
+///////////////////////////////////////////////////////
+
+
 void Being::setup(float height,float width,float floor,int yearInMs,float gravity){
     //beings = _beings;
     this-> yearInMs = yearInMs;
@@ -162,12 +160,13 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     treeLock = false;
 
 
-
 }
 
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
 
 
-//--------------------------------------------------------------
 void Being::update(){
 
     myHeight=maxHeight;
@@ -181,11 +180,6 @@ void Being::update(){
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
     age = timeElapsed/yearInMs;
-
-
-
-
-
 
 
     if(age >=deathAge){
@@ -229,9 +223,9 @@ void Being::update(){
         }
 
 
-        //if(y=yLimit){
+
         changeDirection();
-        //}
+
         move();
     }else{
         yearsDead = age-deathAge;
@@ -240,12 +234,12 @@ void Being::update(){
 
 
 
-
-
-
 }
 
-//--------------------------------------------------------------
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
+
 void Being::draw(){
 
     uint64_t frameIndex = 0;
@@ -260,7 +254,8 @@ void Being::draw(){
         frameIndex = ofGetFrameNum() % imagesRight.size();
     }
 
-//DRAW WHEN ALIVE
+////DRAW WHEN ALIVE
+
     if(alive){
     ofSetColor(c);
     //ofRect(x,y,myWidth,myHeight);
@@ -338,7 +333,8 @@ void Being::draw(){
     }
 
 
-    //DRAW WHEN DEAD
+////DRAW WHEN DEAD
+
     }else{
         ofSetColor(255);
         if(killedByStarvation){
@@ -348,126 +344,16 @@ void Being::draw(){
         y = floor-myHeight;
         tomb.draw(x,y+2);
 
-
     }
-
-
-
-
-}
-void Being::move(){
-    //y = floor-myHeight;
-
-
-
-    y = y+gravity;
-    if(y>floor-myHeight){
-      y = floor-myHeight;
-    }
-
-
-//Will move acording to direction and speed
-    setX(getX()+(getDirection()*getSpeed()));
-
-//If goes beyong screen, change direction
-
-    if(getX()<0){
-        setX(0);
-        setDirection(getDirection()*-1);
-
-    }
-    if(getX()>width-myWidth){
-        setX(width-myWidth);
-        setDirection(getDirection()*-1);
-
-    }
-
-
-    /*
-    if(getX()<0-width){
-        setX(width);
-    }
-    if(getX()>width){
-        setX(0-myWidth);
-    }
-    */
-
-
-
-
-
-
-}
-
-void Being::changeDirection(){
-
-    if(y<floor-myHeight){
-        onTree=false;
-        direction = 0;
-    }else if(starving && closeTreeX !=-1){
-        //float treeX = closeTree.getX();
-        //onTree=false;
-        float treeX = closeTreeX;
-        float rand = ofRandom(2,10);
-        if((treeX+40)-x>2){
-            setDirection(1);
-            onTree=false;
-        }else if((treeX+40)-x<-2){
-            setDirection(-1);
-            onTree=false;
-        }else{
-            setDirection(0);
-            onTree = true;
-            /*
-            if(closeTree.eatApple()){
-                starving =  false;
-            }
-            */
-        }
-
-
-    }else if(ofRandom(1000)>990){
-        onTree=false;
-    float random = ofRandom(1000);
-        if(random<333){
-            setDirection(1);
-
-        }else if(random<666){
-            setDirection(-1);
-        }else if(random>=666){
-            setDirection(0);
-
-        }
-
-    }
-
-
-
 
 }
 
 
 
-//Gets and Sets
 
-void Being::setX(float x){
-    this->x = x;
-
-
-
-}
-
-void Being::setGravity(float gravity){
-    this->gravity = gravity;
-
-
-
-}
-void Being::setY(float y){
-    this->y = y;
-
-
-}
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
 
 float Being::getX(){
     return x;
@@ -494,35 +380,92 @@ int Being::getYearsDead(){
 
 
 }
+int Being::getDirection(){
+    return direction;
+
+}
+float Being::getSpeed(){
+    return speed;
+
+}
+
+float Being::getCloseTreeX(){
+    return closeTreeX;
+
+}
+
+int Being::getMaxAgesStarving(){
+    return maxAgesStarving;
+}
+
+int Being::getAgesStarving(){
+    return agesStarving;
+
+}
+
+
+float Being::getGaveUpX(){
+    return gaveUpX;
+
+
+}
+
+void Being::setGaveUpX(float x){
+    gaveUpX = x;
+
+
+}
+
+void Being::setX(float x){
+    this->x = x;
+
+}
+
+void Being::setGravity(float gravity){
+    this->gravity = gravity;
+
+
+}
+void Being::setY(float y){
+    this->y = y;
+
+}
+
 
 void Being::setDirection(int d){
     direction=d;
 
-
 }
 
-int Being::getDirection(){
-    return direction;
-
-
-}
 
 void Being::setSpeed(float s){
     speed=s;
 
-
 }
 
-float Being::getSpeed(){
-    return speed;
-
-
-}
 void Being::setYearInMs(int i){
    yearInMs = i;
 
 
 }
+
+void Being::setCloseTreeX(float  x){
+    if(x!=-1){
+    treeLock = true;
+    closeTreeX = x;
+    }else{
+        closeTreeX = x;
+    }
+
+}
+
+void Being::setCloseTree(Tree  t){
+    closeTree = t;
+
+}
+///////////////////////////////////////////////////////
+///OTHERS
+///////////////////////////////////////////////////////
 
 bool Being::encountered(Being b){
     /*
@@ -597,22 +540,8 @@ void Being::killSlowly(int alives){
 
 }
 
-void Being::setCloseTreeX(float  x){
-    if(x!=-1){
-    treeLock = true;
-    closeTreeX = x;
-    }else{
-        closeTreeX = x;
-    }
-
-}
 bool Being:: isTreeLock(){
     return treeLock;
-
-}
-
-void Being::setCloseTree(Tree  t){
-    closeTree = t;
 
 }
 
@@ -629,34 +558,81 @@ void Being::feed(){
 bool Being::isOnTree(){
     return onTree;
 
-
-}
-float Being::getCloseTreeX(){
-    return closeTreeX;
-
 }
 
-int Being::getMaxAgesStarving(){
-    return maxAgesStarving;
-}
-
-int Being::getAgesStarving(){
-    return agesStarving;
-
-}
-
-void Being::setGaveUpX(float x){
-    gaveUpX = x;
-
-
-}
-float Being::getGaveUpX(){
-    return gaveUpX;
-
-
-}
 void Being::removeTreeLock(){
     treeLock = false;
+
+}
+
+void Being::changeDirection(){
+
+    if(y<floor-myHeight){
+        onTree=false;
+        direction = 0;
+    }else if(starving && closeTreeX !=-1){
+        //float treeX = closeTree.getX();
+        //onTree=false;
+        float treeX = closeTreeX;
+        float rand = ofRandom(2,10);
+        if((treeX+40)-x>20){
+            setDirection(1);
+            onTree=false;
+        }else if((treeX+40)-x<-20){
+            setDirection(-1);
+            onTree=false;
+        }else{
+            setDirection(0);
+            onTree = true;
+
+        }
+
+
+    }else if(ofRandom(1000)>990){
+        onTree=false;
+    float random = ofRandom(1000);
+        if(random<333){
+            setDirection(1);
+
+        }else if(random<666){
+            setDirection(-1);
+        }else if(random>=666){
+            setDirection(0);
+
+        }
+
+    }
+
+
+}
+void Being::move(){
+    //y = floor-myHeight;
+
+
+
+    y = y+gravity;
+    if(y>floor-myHeight){
+      y = floor-myHeight;
+    }
+
+
+//Will move acording to direction and speed
+    setX(getX()+(getDirection()*getSpeed()));
+
+//If goes beyong screen, change direction
+
+    if(getX()<0){
+        setX(0);
+        setDirection(getDirection()*-1);
+
+    }
+    if(getX()>width-myWidth){
+        setX(width-myWidth);
+        setDirection(getDirection()*-1);
+
+    }
+
+
 
 }
 

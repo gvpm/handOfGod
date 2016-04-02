@@ -35,6 +35,10 @@ Meteor::Meteor(){
 
 }
 
+///////////////////////////////////////////////////////
+///SETUP
+///////////////////////////////////////////////////////
+
 void Meteor::setup(float height,float width,float floor,int yearInMs,float gravity){
 
     onFire.load("cloud1.png");
@@ -58,6 +62,26 @@ void Meteor::setup(float height,float width,float floor,int yearInMs,float gravi
 
 
 }
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
+
+void Meteor::update(){
+    currentTime = ofGetElapsedTimeMillis();
+    timeElapsed = currentTime - birthTime;
+    age = timeElapsed/yearInMs;
+
+
+    yearsDead = age-deathAge;
+
+    move();
+
+
+}
+
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
 
 void Meteor::draw(){
 
@@ -88,18 +112,50 @@ void Meteor::draw(){
 
 }
 
-void Meteor::update(){
-    currentTime = ofGetElapsedTimeMillis();
-    timeElapsed = currentTime - birthTime;
-    age = timeElapsed/yearInMs;
 
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
 
-    yearsDead = age-deathAge;
-
-    move();
+int Meteor::getYearsDead(){
+    return yearsDead;
 
 
 }
+float Meteor::getWidth(){
+    return myWidth;
+
+}
+float Meteor::getX(){
+    return x;
+
+
+}
+float Meteor::getY(){
+    return y;
+
+}
+
+void Meteor::setX(float x){
+    this->x = x;
+
+}
+
+void Meteor::setY(float y){
+    this->y = y;
+
+}
+
+///////////////////////////////////////////////////////
+///OTHERS
+///////////////////////////////////////////////////////
+
+bool Meteor::isAlive(){
+    return alive;
+
+
+}
+
 void Meteor::move(){
     if(alive){
     setY(getY()+gravity);
@@ -117,47 +173,6 @@ void Meteor::move(){
         //floor= y+myHeight-(myHeight/10);
         //y=y+myHeight-(myHeight/10);
     }
-
-
-}
-
-
-//Gets and Sets
-
-void Meteor::setX(float x){
-    this->x = x;
-
-
-}
-
-float Meteor::getX(){
-    return x;
-
-
-}
-float Meteor::getY(){
-    return y;
-
-
-}
-void Meteor::setY(float y){
-    this->y = y;
-
-
-}
-
-bool Meteor::isAlive(){
-    return alive;
-
-
-}
-int Meteor::getYearsDead(){
-    return yearsDead;
-
-
-}
-float Meteor::getWidth(){
-    return myWidth;
 
 
 }

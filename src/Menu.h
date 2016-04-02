@@ -14,14 +14,15 @@ public:
     string select();
 
     string currentSelection;
-    int currentIndex;
-    int previousIndex;
-    int nextIndex;
 
     vector<string> options;
     vector<MenuTile> tiles;
-    ofTrueTypeFont		font;
-    ofTrueTypeFont		font2;
+    ofTrueTypeFont font;
+    ofTrueTypeFont font2;
+
+    int currentIndex;
+    int previousIndex;
+    int nextIndex;
 
     int currentTime;
 

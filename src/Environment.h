@@ -14,15 +14,18 @@ public:
     void draw();
 
     void drawBeings();
-    void updateTrees();
     void drawTrees();
-    void updateBeings();
-    void updateClouds();
     void drawClouds();
-    void updateMeteors();
     void drawMeteors();
 
+    void updateTrees();    
+    void updateBeings();
+    void updateClouds();    
+    void updateMeteors();
+
     void updateBeingsSpeed(int ms);
+
+
     void speedUp();
     void slowDown();
     void giveBirths();
@@ -34,16 +37,23 @@ public:
     void rain();
     void stopRain();
     bool isRaining();
-
     void addMeteor();
-
-    void setGravity();
     void invertGravity();
+
     void removeLock(float x);
 
     void guideStarving();
     void feedStarving();
     float discoverCloseTreeX(float x);
+
+    void loopOnBeings();
+    void loopOnMeteors();
+
+    ofTrueTypeFont font;
+    vector<Being> beings;
+    vector<Tree> trees;
+    vector<Cloud> clouds;
+    vector<Meteor> meteors;
 
     string getCurrentYear();
     string getAlives();
@@ -51,14 +61,8 @@ public:
     string currentYear;
     string alivess;
 
-
-
-    ofTrueTypeFont		font;
-    vector<Being> beings;
-    vector<Tree> trees;
-    vector<Cloud> clouds;
-    vector<Meteor> meteors;
-    //Being being();
+    ofColor nightColor;
+    ofColor dayColor;
 
     float wind;
     float gravity;
@@ -73,6 +77,15 @@ public:
     bool raining;
 
     int maxNOfTrees;
+
+    int yearsInDay;
+    int lastYearChecked;
+
+    int currentPeriod;
+
+
+
+
 
 
 };

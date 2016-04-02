@@ -1,7 +1,7 @@
 #include "Environment.h"
 
 Environment::Environment(){
-    ofBackground(160, 216, 241);
+
     font.loadFont("franklinGothic.otf", 9);
     startTime = ofGetElapsedTimeMillis();
     yearInMs = 1000;
@@ -10,6 +10,21 @@ Environment::Environment(){
     wind = 0.5;
     raining = false;
     maxNOfTrees = 10;
+
+    yearsInDay==20;
+    lastYearChecked=0;
+
+    //nightColor=(72, 48, 120);
+    nightColor.r=72;
+    nightColor.g=48;
+    nightColor.b=120;
+
+    dayColor.r=160;
+    dayColor.g=216;
+    dayColor.b=241;
+
+    //dayColor(160, 216, 241);
+    currentPeriod = 1;
 
     //Inicial beings
     for(int i = 0 ;i<10;i++){
@@ -37,36 +52,33 @@ Environment::Environment(){
 
 }
 
-//--------------------------------------------------------------
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
+
 void Environment::update(){
 
-
-    ofBackground(160, 216, 241);
-    if(raining){
-        ofBackground(170, 226, 251);
-
-    }
 
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - startTime;
     year = timeElapsed/yearInMs;
 
-    //int size = beings.size();
+    if(currentPeriod==1){
+        //ofBackground(72, 48, 120);
+        ofBackground(160, 216, 241);
 
-/*
-    for(int i =0; i<size;i++){
-        if(beings[i].isChildReady()){
-            birthsToGive++;
-            Being b;
-            b.setup(ofGetHeight(),ofGetWidth(),ofGetHeight()-70,yearInMs);
-            b.setX(beings[i].getX());
-            b.setY(beings[i].getY());
-            beings.push_back(b);
-            beings[i].removeChild();
-        }
+    }else if(currentPeriod==-1){
+        ofBackground(72, 48, 120);
 
     }
- */
+
+    if(lastYearChecked!=year && year%30==0){
+        currentPeriod = -currentPeriod;
+
+    }
+    lastYearChecked=(int)year;
+
+
     guideStarving();
     feedStarving();
 
@@ -89,7 +101,10 @@ void Environment::update(){
 
 }
 
-//--------------------------------------------------------------
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
+
 void Environment::draw(){
 
 
@@ -104,98 +119,22 @@ void Environment::draw(){
 
         ofSetColor(0);
         currentYear = ofToString(year);
-        //font.drawString("Years Running: "+currentYear, ofGetWidth()-135, 25);
-        //vector <Being> beingsAux;
 
 
+        loopOnBeings();
+        loopOnMeteors();
 
-
-
-        alives=0;
-        /*
-        for(int i = 0; i<beings.size();i++){
-            if(beings[i].isAlive()){
-                alives++;
-
-            }
-
-        }
-        */
-
-        int j= 0;
-        while ( j < beings.size() ) {
-            if ( !beings[j].isAlive()  && beings[j].getYearsDead()>=5 ||!beings[j].isAlive()  && beings[j].getAgesStarving()>=beings[j].getMaxAgesStarving()+5) {
-                beings.erase( beings.begin() + j );
-            } else if (beings[j].isAlive()) {
-                ++j;
-                alives++;
-            }else{
-                ++j;
-            }
-        }
-
-
-        for(int i = meteors.size()-1;i>=0;i--){
-            if(!meteors[i].isAlive()){
-                float x = meteors[i].getX();
-                for(int z=0;z<beings.size();z++){
-                    float beingX = beings[z].getX();
-                   if (x < beingX && beingX < x+meteors[i].getWidth() &&beings[z].isAlive()){
-                       beings[z].kill();
-
-                   }
-
-                }
-
-                 j= 0;
-                while ( j < trees.size() ) {
-                    float treeX = trees[j].getX();
-                    if (x < treeX+trees[j].getWidth()/2 && treeX+trees[j].getWidth()/2 < x+meteors[i].getWidth()) {
-                        trees.erase(trees.begin() + j );
-                        removeLock(treeX);
-                    } else{
-                        ++j;
-                    }
-                }
-
-
-
-
-
-                if (meteors[i].getYearsDead()>=2) {
-                                meteors.erase( meteors.begin() + i );
-                            }
-
-            }
-
-
-        }
-
-
-
-/*
-
-//DELETE TOMBSTONES EVERY 10 YEARS
-        //if(year%10==0){
-        int j= 0;
-        while ( j < beings.size() ) {
-            if ( !beings[j].isAlive() && (year%2==0)) {
-                beings.erase( beings.begin() + j );
-            } else if (beings[j].isAlive()) {
-                ++j;
-                alives++;
-            }else{
-                ++j;
-            }
-        }
-        //}
-        */
 
         alivess = ofToString(alives);
         //font.drawString("Beings Alive: "+alivess, 30, 25);
 
 
 }
+
+///////////////////////////////////////////////////////
+///OTHERS
+///////////////////////////////////////////////////////
+
 void Environment::drawBeings(){
     for(int i = 0;i<beings.size() ;i++){
 
@@ -356,10 +295,7 @@ void Environment::addMeteor(){
 
 }
 
-void Environment::setGravity(){
 
-
-}
 
 void Environment::invertGravity(){
     gravity = -gravity;
@@ -410,20 +346,7 @@ void Environment::guideStarving(){
             if(!beings[i].isTreeLock()){
             beings[i].setCloseTreeX(x);
             }
-            /*
-            if(x <0){
-                float index = abs(x);
-                if(index+1>trees.size()-1){
-                    beings[i].setCloseTreeX(trees[index-1].getX());
-                }else{
-                    beings[i].setCloseTreeX(trees[index+1].getX());
-                }
 
-            }else{
-
-            }
-            //beings[i].setCloseTree(trees[0]);
-*/
 
         }
 
@@ -452,28 +375,6 @@ float Environment::discoverCloseTreeX(float x){
         return -1;
     }
 
-    /*
-    float closest = ofGetWidth();
-    float r;
-    float closeIndex;
-    for(int j = 0 ;j<trees.size();j++){
-        float dist = abs(trees[j].getX()-x);
-        if(dist<closest && !trees[j].isEmpty()){
-            closest = dist;
-            r = trees[j].getX();
-            closeIndex = j;
-
-        }
-
-
-
-    }
-    if (trees[closeIndex].getNOfApples()<=3 && ofRandom(100)>50){
-        return -closeIndex;
-    }
-    return r;
-    */
-
 
 }
 
@@ -492,7 +393,58 @@ void Environment::feedStarving(){
 
             }
 
+        }
 
+    }
+
+
+}
+
+void Environment::loopOnBeings(){
+
+    alives=0;
+    int j= 0;
+    while ( j < beings.size() ) {
+        if ( !beings[j].isAlive()  && beings[j].getYearsDead()>=5 ||!beings[j].isAlive()  && beings[j].getAgesStarving()>=beings[j].getMaxAgesStarving()+5) {
+            beings.erase( beings.begin() + j );
+        } else if (beings[j].isAlive()) {
+            ++j;
+            alives++;
+        }else{
+            ++j;
+        }
+    }
+
+
+
+}
+void Environment::loopOnMeteors(){
+    for(int i = meteors.size()-1;i>=0;i--){
+        if(!meteors[i].isAlive()){
+            float x = meteors[i].getX();
+            for(int z=0;z<beings.size();z++){
+                float beingX = beings[z].getX();
+               if (x < beingX && beingX < x+meteors[i].getWidth() &&beings[z].isAlive()){
+                   beings[z].kill();
+
+               }
+
+            }
+
+            int j= 0;
+            while ( j < trees.size() ) {
+                float treeX = trees[j].getX();
+                if (x < treeX+trees[j].getWidth()/2 && treeX+trees[j].getWidth()/2 < x+meteors[i].getWidth()) {
+                    trees.erase(trees.begin() + j );
+                    removeLock(treeX);
+                } else{
+                    ++j;
+                }
+            }
+
+            if (meteors[i].getYearsDead()>=2) {
+                            meteors.erase( meteors.begin() + i );
+                        }
 
         }
 
@@ -500,4 +452,5 @@ void Environment::feedStarving(){
 
 
 }
+
 

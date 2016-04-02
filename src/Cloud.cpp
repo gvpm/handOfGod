@@ -4,10 +4,11 @@ Cloud::Cloud(){
 
     cloud.load("cloud1.png");
 
-
-
-
 }
+
+///////////////////////////////////////////////////////
+///SETUP
+///////////////////////////////////////////////////////
 
 void Cloud::setup(float height,float width,float floor,int yearInMs,float wind,float gravity){
 
@@ -30,9 +31,13 @@ void Cloud::setup(float height,float width,float floor,int yearInMs,float wind,f
 
 }
 
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
+
 void Cloud::update(){
     if(raining){
-        for(int i = 0; i<10;i++){
+        for(int i = 0; i<5;i++){
             RainDrop rd;
             rd.setup(ofRandom(x,x+myWidth),y+myHeight/2,gravity,wind,floor);
             rainDrops.push_back(rd);
@@ -46,6 +51,10 @@ void Cloud::update(){
     move();
 
 }
+
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
 
 void Cloud::draw(){
 
@@ -68,6 +77,39 @@ void Cloud::draw(){
 
 }
 
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
+
+float Cloud::getX(){
+    return x;
+
+}
+float Cloud::getY(){
+    return y;
+
+}
+
+void Cloud::setX(float x){
+    this->x = x;
+
+}
+
+
+void Cloud::setY(float y){
+    this->y = y;
+
+}
+
+void Cloud::setWind(float wind){
+    this->wind = wind;
+
+}
+
+///////////////////////////////////////////////////////
+///OTHERS
+///////////////////////////////////////////////////////
+
 void Cloud::move(){
     setX(getX()+wind);
 
@@ -79,35 +121,6 @@ void Cloud::move(){
 
 }
 
-//Gets and Sets
-
-void Cloud::setX(float x){
-    this->x = x;
-
-
-}
-
-float Cloud::getX(){
-    return x;
-
-
-}
-float Cloud::getY(){
-    return y;
-
-
-}
-void Cloud::setY(float y){
-    this->y = y;
-
-
-}
-
-void Cloud::setWind(float wind){
-    this->wind = wind;
-
-
-}
 
 bool Cloud::isRaining(){
     return raining;

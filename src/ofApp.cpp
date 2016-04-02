@@ -1,6 +1,9 @@
 #include "ofApp.h"
 
-//--------------------------------------------------------------
+///////////////////////////////////////////////////////
+///SETUP
+///////////////////////////////////////////////////////
+
 void ofApp::setup(){
     receiver.setup(6448);
     font.loadFont("franklinGothic.otf", 9);
@@ -8,10 +11,14 @@ void ofApp::setup(){
     lastAction = "No Action";
     lastWheelValue = 0;
     topBar.load("topBar.png");
-    //leap.open();
+
 
 }
-//--------------------------------------------------------------
+
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
+
 void ofApp::update(){
     e.update();
     menu.update();
@@ -74,10 +81,6 @@ void ofApp::update(){
                 }
 
 
-                //e.addBeing();
-                //lastAction = "Add Being";
-
-
             }
 
             if(m.getAddress() == "/swipe"){
@@ -86,16 +89,11 @@ void ofApp::update(){
                         if(direction == "right"){
                             menu.swipeRight();
                             actionSelected = menu.select();
-                            //e.decimate((int)wheelValue);
-                            //lastAction = "Decimate";
-                            //lastWheelValue = wheelValue;
+
 
                         }else if(direction == "left"){
                             menu.swipeLeft();
                             actionSelected = menu.select();
-                           // e.impregnate((int)wheelValue);
-                            //lastAction = "Impregnate";
-                            //lastWheelValue = wheelValue;
 
                         }
 
@@ -111,7 +109,11 @@ void ofApp::update(){
 
 }
 
-//--------------------------------------------------------------
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
+
+
 void ofApp::draw(){
 
     e.draw();
@@ -133,44 +135,20 @@ void ofApp::draw(){
 
     font.drawString("Action Selected: "+actionSelected, 840, 30);
 
-    font.drawString("Years Running: "+e.getCurrentYear(), ofGetWidth()-135, 30);
+    font.drawString("Years Running: "+e.getCurrentYear(), 1366-135, 30);
     font.drawString("Beings Alive: "+e.getAlives(), 40, 30);
 
 
 
 
 }
-//--------------------------------------------------------------
+
+///////////////////////////////////////////////////////
+///OTHERS
+///////////////////////////////////////////////////////
+
 void ofApp::keyPressed(int key){
-    /*
-    if(key == '1') {
-       e.decimate(50);
-    }
-    if(key == '2') {
-       e.impregnate(50);
-    }
-    if(key == '3') {
-       e.makeInfertile(50);
-    }
-    if(key == '4') {
-       e.makeFertile(50);
-    }
-    if(key == '5') {
-       e.addBeing();
-    }
-    if(key == '0') {
-       e.invertGravity();
-    }
-    if(key == '6') {
-       e.rain();
-    }
-    if(key == '7') {
-       e.stopRain();
-    }
-    if(key == '8') {
-       e.addMeteor();
-    }
-    */
+
 
     if(key == OF_KEY_UP){
         wheelValue++;
@@ -243,11 +221,6 @@ void ofApp::keyPressed(int key){
            lastWheelValue = wheelValue;
         }
 
-
-        //e.addBeing();
-        //lastAction = "Add Being";
-
-
     }
 
 
@@ -256,21 +229,13 @@ void ofApp::keyPressed(int key){
     if(key == OF_KEY_RIGHT){
         menu.swipeRight();
         actionSelected = menu.select();
-                    //e.decimate((int)wheelValue);
-                    //lastAction = "Decimate";
-                    //lastWheelValue = wheelValue;
+
     }
     if(key == OF_KEY_LEFT){
          menu.swipeLeft();
          actionSelected = menu.select();
-                   // e.impregnate((int)wheelValue);
-                    //lastAction = "Impregnate";
-                    //lastWheelValue = wheelValue;
+
     }
-
-
-
-
 
 
 

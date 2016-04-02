@@ -27,16 +27,19 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
-    ofTrueTypeFont		font;
-    string lastAction;
-    int lastWheelValue;
-
-    string actionSelected;
-
     Environment e;
     Menu menu;
+
     ofxOscReceiver receiver;
+
+    ofTrueTypeFont		font;
+
+    string lastAction;    
+    string actionSelected;
+
+    int lastWheelValue;
     int wheelValue;
+
 
     ofImage topBar;
 

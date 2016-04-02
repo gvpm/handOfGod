@@ -4,6 +4,10 @@ RainDrop::RainDrop(){
 
 }
 
+///////////////////////////////////////////////////////
+///SETUP
+///////////////////////////////////////////////////////
+
 void RainDrop::setup(float  x, float y,float gravity, float wind,float floor){
 
 
@@ -15,14 +19,20 @@ void RainDrop::setup(float  x, float y,float gravity, float wind,float floor){
     alive=true;
 
 
-
-
 }
+
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
 
 void RainDrop::update(){
     move();
 
 }
+
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
 
 void RainDrop::draw(){
     if(alive){
@@ -32,25 +42,11 @@ void RainDrop::draw(){
 
 }
 
-void RainDrop::move(){
-  setY(getY()+gravity);
-  setX(getX()+wind);
-
-  if(y>=floor){
-      alive=false;
-  }
-
-}
 
 
-
-//Gets and Sets
-
-void RainDrop::setX(float x){
-    this->x = x;
-
-
-}
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
 
 float RainDrop::getX(){
     return x;
@@ -62,15 +58,36 @@ float RainDrop::getY(){
 
 
 }
+
+void RainDrop::setX(float x){
+    this->x = x;
+
+}
+
 void RainDrop::setY(float y){
     this->y = y;
 
 
 }
 
+///////////////////////////////////////////////////////
+///OTHER
+///////////////////////////////////////////////////////
+
+
 bool RainDrop::isAlive(){
     return alive;
 
+
+}
+
+void RainDrop::move(){
+  setY(getY()+gravity);
+  setX(getX()+wind);
+
+  if(y>=floor){
+      alive=false;
+  }
 
 }
 

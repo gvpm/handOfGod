@@ -12,16 +12,25 @@ public:
     void draw();
     void move();
 
-    void setX(float x);
-    void setY(float x);
-    void setYearInMs(int i);
+    bool isAlive();
+
+
+///GETS AND SETS
+
     float getX();
     float getY();
     int getYearsDead();
     float getWidth();
 
-    bool isAlive();
+    void setX(float x);
+    void setY(float x);
+    void setYearInMs(int i);
 
+
+///
+    ofImage onFire;
+    ofImage meteor;
+    vector <ofImage> imagesOnFire;
 
     float height;
     float width;
@@ -32,13 +41,9 @@ public:
     float myHeight;
     float myWidth;
 
-    ofImage onFire;
-    ofImage meteor;
-
     int   appFPS;
     float sequenceFPS;
     bool  bFrameIndependent;
-    vector <ofImage> imagesOnFire;
 
     float x;
     float y;

@@ -12,26 +12,29 @@ public:
     void update();
     void draw();
 
+     bool isEmpty();
 
-    //Gets and Sets
+     void eatApple();
 
+///GETS AND SETS
 
-    void setX(float x);
-    void setY(float x);
     float getX();
     float getY();
     int getDirection();
-
     float getWidth();
     float getSpeed();
-    void eatApple();
-
-    bool isEmpty();
-
     int getMaxNOfApples();
     int getNOfApples();
 
-    //
+    void setX(float x);
+    void setY(float x);
+
+///
+
+    ofImage tree;
+    ofImage apple;
+    vector <ofPoint> applePositions;
+    ofColor c;
 
     float height;
     float width;
@@ -41,12 +44,9 @@ public:
     float y;
     float myHeight;
     float myWidth;
-    ofColor c;
+
     int nOfApples;
     int maxNOfApples;
-    vector <ofPoint> applePositions;
-    ofImage tree;
-    ofImage apple;
 
     int currentTime;
     int birthTime;

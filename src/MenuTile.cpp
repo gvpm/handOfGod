@@ -3,66 +3,45 @@
 MenuTile::MenuTile(){
 
 }
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
 
 void MenuTile::setup(string name){
 
     this-> name = name;
-
-
 
     tile.load(name+".png");
     myWidth = tile.getWidth();
 
 
 }
-
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
 
 void MenuTile::update(){
 
 
 
 }
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
+
 
 void MenuTile::draw(){
     ofSetColor(255);
     tile.draw(x,y);
 
-
-
-}
-
-void MenuTile::select(){
-
-    tile.load("s"+name+".png");
-
-
-
-}
-
-void MenuTile::unSelect(){
-
-    tile.load(name+".png");
-
-
-
-}
-
-float MenuTile::getWidth(){
-
-    return myWidth;
-
-
-
 }
 
 
-void MenuTile::setPosition(float x, float y){
-    this->x=x;
-    this->y = y;
 
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
 
-
-}
 string MenuTile::getName(){
     //Files can't have / on name
     if(name== "StartStop Rain"){
@@ -70,7 +49,33 @@ string MenuTile::getName(){
     }
     return name;
 
+}
+float MenuTile::getWidth(){
 
+    return myWidth;
+
+}
+
+void MenuTile::setPosition(float x, float y){
+    this->x=x;
+    this->y = y;
+
+}
+
+
+///////////////////////////////////////////////////////
+///OTHERS
+///////////////////////////////////////////////////////
+
+void MenuTile::select(){
+
+    tile.load("s"+name+".png");
+
+}
+
+void MenuTile::unSelect(){
+
+    tile.load(name+".png");
 
 }
 

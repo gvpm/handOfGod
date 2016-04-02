@@ -17,6 +17,10 @@ myWidth = 105;
 
 }
 
+///////////////////////////////////////////////////////
+///SETUP
+///////////////////////////////////////////////////////
+
 
 void Tree::setup(float height,float width,float floor,int yearInMs){
     this->yearInMs = yearInMs;
@@ -38,9 +42,11 @@ void Tree::setup(float height,float width,float floor,int yearInMs){
 
 }
 
+///////////////////////////////////////////////////////
+///UPDATE
+///////////////////////////////////////////////////////
 
 
-//--------------------------------------------------------------
 void Tree::update(){
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
@@ -70,13 +76,13 @@ void Tree::update(){
     }
 
 
-
-
-
-
 }
 
-//--------------------------------------------------------------
+
+///////////////////////////////////////////////////////
+///DRAW
+///////////////////////////////////////////////////////
+
 void Tree::draw(){
     /*
     ofSetColor(165,42,41);
@@ -100,7 +106,32 @@ void Tree::draw(){
 
 }
 
-//Gets and Sets
+///////////////////////////////////////////////////////
+///GETS AND SETS
+///////////////////////////////////////////////////////
+
+float Tree::getX(){
+    return x;
+
+}
+float Tree::getY(){
+    return y;
+
+}
+
+float Tree::getWidth(){
+    return myWidth;
+
+}
+
+int Tree::getMaxNOfApples(){
+    return maxNOfApples;
+
+}
+int Tree::getNOfApples(){
+    return applePositions.size();
+
+}
 
 void Tree::setX(float x){
     this->x = x;
@@ -114,16 +145,11 @@ void Tree::setY(float y){
 
 }
 
-float Tree::getX(){
-    return x;
+///////////////////////////////////////////////////////
+///OTHER
+///////////////////////////////////////////////////////
 
 
-}
-float Tree::getY(){
-    return y;
-
-
-}
 
 bool Tree::isEmpty(){
 
@@ -145,19 +171,7 @@ void Tree::eatApple(){
 
 }
 
-float Tree::getWidth(){
-    return myWidth;
 
-}
-
-int Tree::getMaxNOfApples(){
-    return maxNOfApples;
-
-}
-int Tree::getNOfApples(){
-    return applePositions.size();
-
-}
 
 
 

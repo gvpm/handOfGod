@@ -14,11 +14,15 @@ public:
 
     bool isAlive();
 
-    void setX(float x);
-    void setY(float x);
+///GETS AND SETS
 
     float getX();
     float getY();
+
+    void setX(float x);
+    void setY(float x);
+
+///
 
     float x;
     float y;

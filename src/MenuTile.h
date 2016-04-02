@@ -9,10 +9,10 @@ public:
     void update();
     void draw();
     void select();
-
     void unSelect();
-
     void setPosition(float x, float y);
+
+
     float getWidth();
     string getName();
 
