@@ -1,3 +1,8 @@
+///////////////////////////////////////////////////////
+///CLASS - RainDrop
+///
+///
+///////////////////////////////////////////////////////
 #include "RainDrop.h"
 
 RainDrop::RainDrop(){
@@ -10,7 +15,7 @@ RainDrop::RainDrop(){
 
 void RainDrop::setup(float  x, float y,float gravity, float wind,float floor){
 
-
+    //to know when to kill itself
     this->floor = floor;
     this->wind = wind;
     this-> gravity = gravity;
@@ -35,6 +40,7 @@ void RainDrop::update(){
 ///////////////////////////////////////////////////////
 
 void RainDrop::draw(){
+    //draws itself if its alive, its only a really small rectangle
     if(alive){
         ofSetColor(0,0,250);
         ofRect(x,y,1,1);
@@ -80,10 +86,13 @@ bool RainDrop::isAlive(){
 
 
 }
-
+//falls according to the gravity and moveson the x cordinate according to the wind
 void RainDrop::move(){
   setY(getY()+gravity);
   setX(getX()+wind);
+    //kills itself if it hits the floor
+
+
 
   if(y>=floor){
       alive=false;

@@ -1,3 +1,8 @@
+///////////////////////////////////////////////////////
+///CLASS - Being
+///
+///
+///////////////////////////////////////////////////////
 #include "Being.h"
 
 Being::Being(){
@@ -136,15 +141,21 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     //y=floor-myHeight);
 
     //y=ofRandom(this->height);
+    //sets initial time
     birthTime =  ofGetElapsedTimeMillis();
+
+    //determines when it is going to die
     deathAge = ofRandom(60,100);
     deathTime = birthTime +(deathAge*yearInMs);
+
     pregnant=false;
+    //to be change after one year pregnant
     childReady = false;
     //yLimit = floor-myHeight;
     yearsDead =0;
     fertile = true;
     this->gravity=gravity;
+    //determines what is young age
     youngAge = 12;
     starving = false;
     closeTreeX = -1;
@@ -154,6 +165,7 @@ void Being::setup(float height,float width,float floor,int yearInMs,float gravit
     ageOfLastMeal = 0;
     lastAgeChecked = 0;
 
+    //Eating main settings
     eatEveryXAges=10;
     maxAgesStarving=30;
 
@@ -171,38 +183,42 @@ void Being::update(){
 
     myHeight=maxHeight;
     myWidth = maxWidth;
+    //case when is is still a child
     if(age<youngAge){
         myHeight=childHeight;
         myWidth = childWidth;
 
     }
     //y=yLimit;
+
+    //updates time variables
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
     age = timeElapsed/yearInMs;
 
-
+    //kills itself when reaches death age
     if(age >=deathAge){
         alive = false;
 
     }
-
-    if(alive){
+    //does  everything only if it is alive
+    if(alive){//checks once every age
         if(lastAgeChecked!=age){
             agesWithoutMeal = age-ageOfLastMeal;
+            //sets starving status
             if(agesWithoutMeal>eatEveryXAges){
                 if(!starving){
                 starving=true;
                 }
                 agesStarving = agesWithoutMeal-eatEveryXAges;
-            }
+            }//it decreases its life time if its starving for too long
             if(agesStarving>maxAgesStarving){
                 //if(alive){
                 deathAge --;
                 if(deathAge<=age){
                     //deathAge = age;
                     kill();
-                }
+                }//sets if it lost any time of life because of starvation
                 killedByStarvation = true;
                 //}
             }
@@ -212,22 +228,24 @@ void Being::update(){
         lastAgeChecked = age;
 
 
-
+        //has a chance of getting pregnant each frame
         if(ofRandom(10000)>9997 && !isPregnant()&& age>youngAge){
             impregnate();
 
         }
+        //gives birth if its pregnant
+        //basically removes pregnant status and updates child ready
         if(isPregnant()){
             giveBirth();
 
         }
 
 
-
+        //changes direction
         changeDirection();
-
+        //moves
         move();
-    }else{
+    }else{//if its dead will increase the amount of years dead
         yearsDead = age-deathAge;
 
     }
@@ -466,7 +484,7 @@ void Being::setCloseTree(Tree  t){
 ///////////////////////////////////////////////////////
 ///OTHERS
 ///////////////////////////////////////////////////////
-
+//not implemented and not in use
 bool Being::encountered(Being b){
     /*
     float otherX = b.getX();
@@ -486,13 +504,14 @@ bool Being::isPregnant(){
 
     return pregnant;
 }
+//impregnate if fertile
 void Being::impregnate(){
     if(fertile&&age>youngAge){
     pregAge=age;
     pregnant = true;
     }
 }
-
+//sets child ready and remove pregnance, environment will deal with birth
 void Being::giveBirth(){
     if(pregAge<age){
 
@@ -528,7 +547,9 @@ void Being::kill(){
 
 }
 
-
+//it will kill the being in a random number of years between 0 and a given division
+//that division is calculated acordind to the number of beings alive
+//this is to reduce lag and improve performance when the world is crowded
 void Being::killSlowly(int alives){
     //alive=false;
     int division = (int)(alives/100);
@@ -549,6 +570,7 @@ bool Being::isStarving(){
     return starving;
 
 }
+//removes starving status and sets up the age of last meal
 void Being::feed(){
     starving = false;
     ageOfLastMeal=age;
@@ -564,7 +586,11 @@ void Being::removeTreeLock(){
     treeLock = false;
 
 }
+//changes direction
+//will go towards the designated tree when starving (if there  is one)
+//it will stop when it reaches the tree
 
+//if not starving will just change randomly with a  chance of doing so
 void Being::changeDirection(){
 
     if(y<floor-myHeight){
@@ -605,6 +631,12 @@ void Being::changeDirection(){
 
 
 }
+//moves the being acording to the direction
+//makes the being fall or fly acording to gravity
+//makes the being stop on floor
+//change direction when it reaches sreen borders
+
+
 void Being::move(){
     //y = floor-myHeight;
 

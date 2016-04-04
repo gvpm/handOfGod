@@ -1,3 +1,8 @@
+///////////////////////////////////////////////////////
+///CLASS - Tree
+///
+///
+///////////////////////////////////////////////////////
 #include "Tree.h"
 
 Tree::Tree(){
@@ -29,8 +34,9 @@ void Tree::setup(float height,float width,float floor,int yearInMs){
     this->floor = floor;
     x=ofRandom(this->width-myWidth);
     y=floor-myHeight;
+    //loads apple image
     apple.load("apple.png");
-
+    //time variables
     birthTime =  ofGetElapsedTimeMillis();
     age = 0;
     timeElapsed=0;
@@ -48,6 +54,8 @@ void Tree::setup(float height,float width,float floor,int yearInMs){
 
 
 void Tree::update(){
+
+    //updates time variables
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
     age = timeElapsed/yearInMs;
@@ -60,7 +68,7 @@ void Tree::update(){
 
     if(age%1==0  && age!=lastAge){
         lastAge = age;
-
+        //creates 2 apples in each second
         if(applePositions.size()<maxNOfApples-1){
             ofPoint applePoint;
             applePoint.x=ofRandom(x+12,x+myWidth-20);
@@ -92,7 +100,7 @@ void Tree::draw(){
     */
     ofSetColor(255);
     tree.draw(x,y);
-
+    //draws all the apples on the set potitions
     for(int i=0;i<applePositions.size();i++){
         ofSetColor(250);
         apple.draw(applePositions[i]);
@@ -158,6 +166,7 @@ bool Tree::isEmpty(){
 
 }
 
+//removes an apple from the vector and sets tree empty if it became empty
 void Tree::eatApple(){
 
      applePositions.pop_back();

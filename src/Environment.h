@@ -39,6 +39,7 @@ public:
     bool isRaining();
     void addMeteor();
     void invertGravity();
+    void addTreesWithRain();
 
     void removeLock(float x);
 

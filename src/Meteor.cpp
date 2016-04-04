@@ -1,3 +1,8 @@
+///////////////////////////////////////////////////////
+///CLASS - Meteor
+///
+///
+///////////////////////////////////////////////////////
 #include "Meteor.h"
 
 Meteor::Meteor(){
@@ -5,7 +10,8 @@ Meteor::Meteor(){
     ofDirectory meteorFire;
     meteor.load("meteorRock.png");
 
-//LOAD RIGHT IMAGES
+//LOAD IMAGES
+    //sets the meteor images directory
     int nFiles = meteorFire.listDir("meteorFire");
     if(nFiles) {
 
@@ -41,7 +47,7 @@ Meteor::Meteor(){
 
 void Meteor::setup(float height,float width,float floor,int yearInMs,float gravity){
 
-    onFire.load("cloud1.png");
+    //onFire.load("cloud1.png");
     this-> yearInMs = yearInMs;
     this->height = height;
     this->width = width;
@@ -50,7 +56,7 @@ void Meteor::setup(float height,float width,float floor,int yearInMs,float gravi
 
     myHeight = imagesOnFire[0].getHeight();
     myWidth = imagesOnFire[0].getWidth();
-
+    //will have a random x position
     x=ofRandom(this->width-myWidth);
     y=ofRandom(0);
     alive = true;
@@ -67,13 +73,15 @@ void Meteor::setup(float height,float width,float floor,int yearInMs,float gravi
 ///////////////////////////////////////////////////////
 
 void Meteor::update(){
+
+    //updates the time informations
     currentTime = ofGetElapsedTimeMillis();
     timeElapsed = currentTime - birthTime;
     age = timeElapsed/yearInMs;
 
-
+    //to calculate how long it has been dead
     yearsDead = age-deathAge;
-
+    //to fall
     move();
 
 
@@ -96,11 +104,13 @@ void Meteor::draw(){
         // count. then mod to wrap.
         frameIndex = ofGetFrameNum() % imagesOnFire.size();
     }
+    //draws the sprite if alive, it looks like its on fire
     if(alive){
         ofSetColor(255);
 
     imagesOnFire[frameIndex].draw(x, y);
     }else{
+        //draws the one without fire
         ofSetColor(255);
 
         //y = floor;

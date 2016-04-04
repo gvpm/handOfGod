@@ -1,7 +1,14 @@
+///////////////////////////////////////////////////////
+///CLASS - Menu
+///
+///
+///////////////////////////////////////////////////////
 #include "Menu.h"
 
 Menu::Menu(){
 
+    //Creating and addind the menu tiles in the menu vector
+    //It only needs the name!
     MenuTile m1;
     m1.setup("Meteor");
     tiles.push_back(m1);
@@ -30,6 +37,8 @@ Menu::Menu(){
 
     currentIndex = 0;
 
+    //variables to help on the position
+    //The menu adapts itself and it will be centered if you emove or add menu options
     float firstX;
     float menuY = ofGetHeight()/3;
 
@@ -37,36 +46,15 @@ Menu::Menu(){
     float tileSize = tiles[0].getWidth();
 
     menuSize = tileSize*tiles.size();
-
+    //discovers the first X of the first menu tile
     firstX = (ofGetWidth()-menuSize)/2;
 
+    //Feeds all the menu tiles with their right positions
     for(int i = 0; i<tiles.size();i++){
         tiles[i].setPosition(firstX+(tileSize*i),menuY);
     }
 
-    /*
-
-    font.loadFont("franklinGothic.otf", 30);
-    font2.loadFont("franklinGothic.otf", 10);
-
-    options.push_back("Decimate");
-    options.push_back("Impregnate");
-    options.push_back("Make Infertile");
-    options.push_back("Make Fertile");
-    options.push_back("Add Being");
-    options.push_back("Invert Gravity");
-    options.push_back("Start/Stop Rain");
-    options.push_back("Meteor");
-
-
-
-    currentIndex = options.size()/2;
-    currentSelection = options[currentIndex];
-    previousIndex = currentIndex-1;
-    nextIndex = currentIndex+1;
-
-    */
-
+    //helps on the menu timing
     open = false;
 
 
@@ -77,6 +65,7 @@ Menu::Menu(){
 ///////////////////////////////////////////////////////
 
 void Menu::update(){
+    //updates the currennt time value
     currentTime = ofGetElapsedTimeMillis();
 
 }
@@ -87,13 +76,14 @@ void Menu::update(){
 
 void Menu::draw(){
 
-
+    //draws only if menu is open
     if(open){
+        //draws all the tiles
     for(int i = 0; i<tiles.size();i++){
         tiles[i].draw();
     }
 
-
+        //sets open to false if menu is open for a long time
         if(currentTime-lastOpenTime>2000){
             open = false;
 
@@ -101,23 +91,7 @@ void Menu::draw(){
     }
 
 
-    /*
-    string menu;
 
-    for(int i = 0; i<options.size();i++){
-        if(i!=0){
-            menu +="   -   "+options[i];
-        }else{
-           menu +=options[i];
-        }
-
-    }
-    font2.drawString(menu,ofGetWidth()/4,ofGetHeight()/4);
-
-
-    font.drawString(options[previousIndex]+"    >>"+currentSelection+"<<    "+options[nextIndex], ofGetWidth()/4, ofGetHeight()/2);
-
-*/
 
 }
 
@@ -125,65 +99,45 @@ void Menu::draw(){
 ///OTHERS
 ///////////////////////////////////////////////////////
 
+//Swipe functions called by the ofApp
 void Menu::swipeRight(){
-
+    //Values to keep it open for the right time
     lastOpenTime = currentTime;
     open = true;
-
+    //unselects the current
     tiles[currentIndex].unSelect();
-    currentIndex ++;
+    currentIndex ++;//increases the index value
+    //if it reaches the end, goes to the begining
     if(currentIndex >tiles.size()-1){
         currentIndex = 0;
     }
+    //selects the new one
     tiles[currentIndex].select();
     currentSelection = tiles[currentIndex].getName();
 
-
-    /*
-
-    previousIndex = currentIndex;
-    currentIndex = nextIndex;
-    nextIndex = currentIndex+1;
-
-    if(nextIndex >options.size()-1){
-        nextIndex = 0;
-    }
-
-    currentSelection = options[currentIndex];
-    */
 
 
 
 }
 void Menu::swipeLeft(){
-
+    //Values to keep it open for the right time
     lastOpenTime = currentTime;
     open = true;
-
+    //unselects the current
     tiles[currentIndex].unSelect();
-    currentIndex --;
+    currentIndex --;//decreases the index value
+    //if it reaches the begining, goes to the end
     if(currentIndex <0){
         currentIndex = tiles.size()-1;
     }
+    //selects the new one
     tiles[currentIndex].select();
     currentSelection = tiles[currentIndex].getName();
-
-    /*
-
-    nextIndex = currentIndex;
-    currentIndex = previousIndex;
-    previousIndex = currentIndex-1;
-
-    if(previousIndex <0){
-        previousIndex = options.size()-1;
-    }
-
-    currentSelection = options[currentIndex];
-    */
 
 
 }
 
+//returns the current selection
 string Menu::select(){
     return currentSelection;
 
