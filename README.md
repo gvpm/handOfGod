@@ -1,4 +1,4 @@
-# handOfGod
+## handOfGod
 Control a virtual environment with the palm of your hand.
 
 OpenFrameworks @ QtCreator With SkyWriter Raspberry Pi Hat
