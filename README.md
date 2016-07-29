@@ -36,28 +36,31 @@ Primitive state, testing simple movement
 
 Sprites added, long simulation and debugging periods
 
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/2-long-test-450x253.png)
 
 Different colors to represent different Being States
 
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/4-color-e1459790442367-600x185.png)
 
 Clouds Added
 
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/5-cloud-e1459790493613-450x193.png)
 
 Top Bar added
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/10-apple-and-food-e1459790339315-768x33.png)
 
 Apples on treed added, beings can now eat
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/10-apple-and-food-2-e1459790590884-150x150.png)
 Night period added
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/11-night-450x253.png)
 Interaction Menu added
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
-8![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/8-menu-tile-450x253.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/8-menu-tile-2-e1459791671174.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/8-menu-e1459791688997-450x161.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/12-final-menu-e1459790629415-768x114.png)
 OSC messages added and triggers
-![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/6-osc-e1459791767931-600x531.png)
 
