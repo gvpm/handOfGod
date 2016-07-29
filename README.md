@@ -99,19 +99,32 @@ Kill approximately 50 each year over 10 years
 ##Final State (For Now)
 
 Here are some characteristics of the current state:
+
 – One second = 1 year
+
 – A being can give birth between the age of 12 and its death age.
+
 – Beings have a small change to randomly get pregnant in those years.
-– The death age of a being is determined on its birth and it  will be a value between 60 and 100 years.
+
+
 – A being will start to be hungry after 10 years without eating and it will search for food.
+
 – After 30 years being hungry and not being able to get food, his death age will be decreased by 1 year, each year.
+
 – One Tree can provide  enough food for approximately 50 beings.
+
 – One day lasts 30 years, one night lasts another 30 years.
+
 – When pregnant, beings turn slightly red.
+
 – Pregnancy lasts 1 year.
+
 – Beings under 12 are smaller and  darker.
+
 – Beings can be infertile and will not get pregnant.
+
 – Infertile Beings are  slightly green.
+
 
  
 ##The Interactions
@@ -124,32 +137,35 @@ Here are some characteristics of the current state:
 
  
 
-The Wheel Value:
+####The Wheel Value:
 When an interaction uses the wheel value, it means that the action will be applied in the percentage defined as the current Wheel Value.
 
  
 
-The Bible
+####The Bible
 
 To trigger the interactions, “The Bible” was created. A book was glued and carved inside to fit the Raspberry Pi with the Skywriter HAT (responsible for tracking the  movements) and an battery.
-Here is the scheme used in the project.diagram
+Here is the scheme used in the project.
+
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/diagram-450x450.png)
 
 The Pi runs a python code that detects specific movements from the HAT and sends OSC messages via the router to the OSC Receiver, that is the running environment. The app then calls the respective functions according to the messages received. They functions can be: Swipe Right, Swipe Left and Select an option.
 
 Here are some pictures of the  bible creation and testing process:
 
-6 osc device
 
-13 bible o13 bible i
-13 bible
-13 bible 9
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/6-osc-device-450x253.jpg)
+
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/13-bible-o-450x253.jpg)
+ 
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/13-bible-i-450x253.jpg)
+
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/13-bible-450x800.jpg)
+ 
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/13-bible-9-450x253.jpg)
 
  
-
- 
-
- 
-To do
+####To do
 
 To tune up the world created, some depth and different levels might be added, the beings would be able to walk in more directions.
 
