@@ -32,29 +32,32 @@ The book is The Bible, and that is the critique. Sadly, the bible, the coran and
 
 Primitive state, testing simple movement
 
-1 initial
+![alt tag](http://doc.gold.ac.uk/~tpapa001/wccterm2/wp-content/uploads/2016/04/1-initial-450x225.png)
 
 Sprites added, long simulation and debugging periods
 
-2 long test
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+
 Different colors to represent different Being States
 
-4 color
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
 
 Clouds Added
 
-5 cloud
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
 
-Top Bar added10 apple and food
+Top Bar added
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
 
 Apples on treed added, beings can now eat
-10 apple and food
-Night period added11 night
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+Night period added
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
 Interaction Menu added
-8 menu tile
-8 menu tile 2
-8 menu
-12 final menu
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+8![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
 OSC messages added and triggers
-6 osc
+![alt tag](https://github.com/gvpm/handOfGod/blob/master/blogpics/Example.png)
 
