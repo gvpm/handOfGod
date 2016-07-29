@@ -22,3 +22,39 @@ Eli stumbles upon a city where its Mayor knows about and it is looking for a boo
 
 The book is The Bible, and that is the critique. Sadly, the bible, the coran and religion in general was  used through the years by some people acting in bad faith with the sole intention of obtaining or increasing their power/influence and controlling people to act in their behalf .
 
+##The Environment
+
+ 
+
+Evolution
+
+ 
+
+Primitive state, testing simple movement
+
+1 initial
+
+Sprites added, long simulation and debugging periods
+
+2 long test
+Different colors to represent different Being States
+
+4 color
+
+Clouds Added
+
+5 cloud
+
+Top Bar added10 apple and food
+
+Apples on treed added, beings can now eat
+10 apple and food
+Night period added11 night
+Interaction Menu added
+8 menu tile
+8 menu tile 2
+8 menu
+12 final menu
+OSC messages added and triggers
+6 osc
+
